@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+/* Reset default margin and padding, set box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Style untuk body halaman */
+body {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(44, 241, 38);
+  position: relative;
+}
+
+/* Style untuk container utama */
+.container {
+  z-index: 12;
+  max-width: 1050px;
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  margin: 0 auto;
+  /* Perataan tengah container */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  /* Tambahkan padding agar konten tidak terlalu menempel pada tepi */
+}
+
+/* Style untuk content di dalam container */
+.container .content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Style untuk image box */
+.content .image-box {
+  max-width: 55%;
+}
+
+.content .image-box img {
+  width: 100%;
+}
+
+/* Style untuk teks topik */
+.content .topic {
+  font-size: 32px;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-weight: 500;
+  color: black;
+}
+
+/* Style untuk form */
+.content form {
+  width: 100%;
+  max-width: 600px;
+  /* Sesuaikan lebar form agar tidak terlalu lebar pada layar besar */
+  margin: 0 auto;
+  /* Perataan tengah form */
+}
+
+/* Style untuk input box */
+.content .input-box {
+  height: 50px;
+  width: 100%;
+  margin: 16px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Style untuk input field */
+.content .input-box input {
+  flex: 1;
+  height: 100%;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  padding: 0 16px;
+  background: #fae9fb;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+/* Style saat input dalam fokus */
+.content .input-box input:focus,
+.content .input-box input:valid {
+  border-color: #fff;
+  background-color: #fff;
+}
+
+/* Style label di dalam input box */
+.content .input-box label {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  color: #636c72;
+  font-size: 15px;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+
+/* Style label saat input dalam fokus */
+.content .input-box input:focus~label,
+.content .input-box input:valid~label {
+  top: 0;
+  left: 12px;
+  font-size: 14px;
+  color: black;
+  background: #fff;
+}
+
+/* Style untuk input submit */
+.content .input-box input[type="submit"] {
+  color: #fff;
+  background: rgb(44, 241, 38);
+  padding-left: 0;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+/* Style untuk hover pada input submit */
+.content .input-box input[type="submit"]:hover {
+  background-color: rgb(12, 192, 6);
+}
+
+/* Style untuk tombol toggle password */
+.toggle-password {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: black;
+  /* Warna ikon mata hitam */
+  font-size: 18px;
+  /* Ukuran ikon */
+}
+
+/* Style untuk ikon di tombol toggle password */
+.toggle-password i {
+  color: black;
+  /* Warna ikon mata hitam */
+  font-size: 18px;
+  /* Ukuran ikon */
+}
+
+/* Style untuk alert dan error */
+.alert {
+  height: 68px;
+  width: 100%;
+  margin: 16px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #f8d7da;
+  /* Background alert */
+  padding: 10px;
+  /* Tambahkan padding untuk jarak di dalam alert */
+  border-radius: 6px;
+  /* Rounded corners */
+  display: none;
+  /* Hidden by default */
+}
+
+.alert .error {
+  color: #D93025;
+  font-size: 18px;
+  margin-right: 10px;
+  /* Jarak antara ikon dan teks */
+}
+
+.alert .text {
+  font-size: 16px;
+  color: #D93025;
+}
+
+/* Style untuk feedback password */
+.password-feedback {
+  font-size: 16px;
+  color: #D93025;
+  margin: 10px 0;
+  /* Jarak antara feedback dan input */
+}
+
+/* Style untuk feedback password yang valid */
+.success {
+  height: 68px;
+  width: 100%;
+  margin: 16px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #d4edda;
+  /* Background success */
+  padding: 10px;
+  /* Tambahkan padding untuk jarak di dalam success */
+  border-radius: 6px;
+  /* Rounded corners */
+  display: none;
+  /* Hidden by default */
+}
+
+.success .success-icon {
+  color: #28a745;
+  font-size: 18px;
+  margin-right: 10px;
+  /* Jarak antara ikon dan teks */
+}
+
+.success .text {
+  font-size: 16px;
+  color: #28a745;
+}

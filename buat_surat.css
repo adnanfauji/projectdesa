@@ -1,0 +1,432 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: #eef5fe;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.nav_image {
+    display: flex;
+    min-width: 55px;
+    justify-content: center;
+}
+
+.nav_image img {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 270px;
+    background: #ffffff;
+    padding: 15px 10px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease-in-out;
+}
+
+.sidebar.close {
+    width: calc(55px + 20px);
+}
+
+.logo_items {
+    gap: 8px;
+}
+
+.logo_name {
+    font-size: 22px;
+    color: #333;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.sidebar.close .logo_name,
+.sidebar.close #hamburger-icon,
+.sidebar.close #sidebar-close {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#hamburger-icon,
+#sidebar-close {
+    padding: 10px;
+    margin-left: 5px;
+    color: #000;
+    font-size: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.menu_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 20px;
+    overflow-y: auto;
+    height: calc(100% - 82px);
+}
+
+.menu_container::-webkit-scrollbar {
+    display: none;
+}
+
+.menu_title {
+    position: relative;
+    height: 50px;
+    width: 55px;
+}
+
+.menu_title .title {
+    margin-left: 15px;
+    transition: all 0.3s ease;
+}
+
+.sidebar.close .title {
+    opacity: 0;
+}
+
+.menu_title .line {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 3px;
+    width: 20px;
+    border-radius: 25px;
+    background: #aaa;
+    transition: all 0.3s ease;
+}
+
+.menu_title .line {
+    opacity: 0;
+}
+
+.sidebar.close .line {
+    opacity: 1;
+}
+
+.item {
+    list-style: none;
+}
+
+.link {
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    color: #707070;
+}
+
+.link:hover {
+    color: #fff;
+    background-color: #4070f4;
+}
+
+.link span {
+    white-space: nowrap;
+}
+
+.link i {
+    height: 50px;
+    min-width: 55px;
+    display: flex;
+    font-size: 22px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.sidebar_profile {
+    display: flex;
+    align-items: center;
+    padding-top: 15px;
+    margin-top: 15px;
+    gap: 10px; 
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.sidebar_profile .data_text .email {
+    font-size: 12px; 
+    color: #707070; 
+}
+
+.data_text {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    z-index: 10;
+    max-width: 100%;
+    width: calc(100% - 270px);
+    position: fixed;
+    top: 0;
+    left: 270px;
+    background: #4070f4;
+    padding: 10px 20px;
+    justify-content: space-between;
+    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+.divider {
+    height: 2px; /* Ketebalan garis */
+    background-color: #ccc; /* Warna garis */
+    margin: 10px 0; /* Jarak atas dan bawah */
+}
+
+.header-container h1 {
+    margin-bottom: 30px;
+    margin-left: 5px;
+    letter-spacing: 1px;
+}
+
+.header-container h2 {
+    margin-left: 10px;
+    margin-top: 10px;
+    letter-spacing: 1px;
+}
+
+.header-container h3 {
+    margin-left: 15px;
+}
+
+.header-container input[type="submit"] {
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 25%; /* Atur jarak sesuai kebutuhan */
+    margin-top: 10px;
+    background-color: #4070f4;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border: none; /* Menghapus border default */
+    border-radius: 8px; /* Sudut yang lebih halus */
+    color: white; /* Warna teks */
+    padding: 10px 20px; /* Padding untuk memperhalus */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transisi */
+}
+
+/* Efek hover */
+.header-container input[type="submit"]:hover {
+    background-color: #365e9b; /* Warna saat hover */
+    transform: scale(1.05); /* Efek sedikit membesar */
+}
+
+.search_box {
+    height: 46px;
+    max-width: 500px;
+    width: 100%;
+    border: 1px solid #aaa;
+    outline: none;
+    border-radius: 8px;
+    padding: 0 15px;
+    font-size: 18px;
+    color: #333;
+}
+
+.navbar img {
+    height: 40px;
+    width: 40px;
+    margin-left: 20px;
+}
+
+.content-class {
+    margin-top: 60px; 
+    padding: 10px;
+    background-color: #f9f9f9; /* Ganti dengan warna yang diinginkan */
+    border-radius: 8px;
+}
+
+.sidebar.close ~ .content-class { 
+    margin-left: 75px; 
+    transition: margin-left 0.3s ease-in-out; /* Tambahkan transisi di sini */
+}
+
+.container {
+    max-width: 1050px;
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    margin: 0 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    margin-left: 270px; 
+    margin-top: 90px; /* Tambahkan margin untuk menggeser ke bawah navbar */
+    transition: margin-left 0.3s ease-in-out; /* Tambahkan transisi di sini */
+}
+
+.container .content {
+    display: flex;
+    align-items: flex-start; /* Pastikan form rata atas */
+    padding: 25px 20px;
+}
+
+.content form {
+    width: 45%;
+    margin-right: 100px;
+}
+
+.content .input-box {
+    height: 50px;
+    width: 100%;
+    margin: 16px 0;
+    display: flex; /* Mengatur flex untuk input dan label */
+    align-items: center; /* Rata tengah secara vertikal */
+}
+
+.content .input-box label {
+    margin-right: 10px; /* Atur jarak antara label dan input */
+    width: 150px; /* Atur lebar label sesuai kebutuhan */
+}
+
+/* Gaya untuk elemen input */
+.content .input-box input {
+    flex: 1; /* Input mengambil sisa ruang yang tersedia */
+    height: 100%;
+    border-radius: 6px;
+    font-size: 16px;
+    outline: none;
+    padding: 0 16px; /* Padding untuk input */
+    background: #fae9fb; /* Latar belakang */
+    border: 2px solid transparent; /* Border awal */
+    transition: all 0.3s ease; /* Transisi saat fokus */
+}
+
+/* Gaya untuk elemen input tanggal */
+.content .input-box input[type="date"] {
+    flex: 1; /* Input mengambil sisa ruang yang tersedia */
+    height: 50px; /* Tinggi yang sama dengan input lainnya */
+    border-radius: 6px;
+    font-size: 16px;
+    outline: none;
+    cursor: pointer;
+    padding: 0 16px; /* Padding untuk input */
+    background: #fae9fb; /* Latar belakang */
+    border: 2px solid transparent; /* Border awal */
+    transition: all 0.3s ease; /* Transisi saat fokus */
+}
+
+/* Mengubah warna border saat fokus untuk input tanggal */
+.content .input-box input[type="date"]:focus {
+    border-color: #4070f4; /* Ganti dengan warna saat fokus */
+    background: #fff; /* Warna latar saat fokus */
+}
+
+/* Mengubah warna border saat fokus */
+.content .input-box input:focus {
+    border-color: #4070f4; /* Ganti dengan warna saat fokus */
+    background: #fff; /* Warna latar saat fokus */
+}
+
+/* Gaya untuk elemen select */
+.select-box {
+    position: relative;
+    width: 60%;
+    height: 50px; /* Tinggi yang sama dengan input lainnya */
+    border-radius: 6px;
+    background: #fae9fb;
+    border: 2px solid transparent; /* Border awal */
+    padding: 10px 16px; /* Padding dalam select */
+    font-size: 16px;
+    outline: none;
+    appearance: none; /* Menghapus tampilan default */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Menambahkan ikon dropdown */
+.select-box::after {
+    content: '\f078'; /* Unicode untuk panah bawah */
+    font-family: 'Font Awesome 5 Free'; /* Pastikan menggunakan font yang benar */
+    font-weight: 900; /* Menggunakan font bold untuk ikon */
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* Agar tidak mengganggu klik pada select */
+}
+
+/* Mengubah warna border saat fokus */
+.select-box:focus {
+    border-color: #4070f4; /* Ganti dengan warna saat fokus */
+}
+
+/* Gaya untuk option */
+.select-box option {
+    background: #fff; /* Warna latar untuk dropdown */
+    color: #333; /* Warna teks */
+}
+
+.content .input-box .perihal {
+    margin-top: 20px;
+    height: 80px; /* Mengubah tinggi input menjadi 70px hanya untuk input perihal */
+    width: 60%;
+    resize: none; /* Nonaktifkan opsi resize */
+    padding: 10px; /* Padding untuk area teks */
+    background: #fae9fb;
+    border-radius: 6px; /* Sudut yang lebih halus */
+    border: 2px solid transparent; /* Border awal */
+    transition: all 0.3s ease; /* Transisi saat fokus */
+}
+
+/* Mengubah warna border textarea saat fokus */
+.perihal {
+    border: 2px solid #ccc; /* Warna border default */
+    border-radius: 4px; /* Opsional: radius sudut */
+    padding: 10px; /* Opsional: padding dalam textarea */
+    width: 100%; /* Opsional: membuat textarea mengisi lebar kontainer */
+    resize: vertical; /* Mengizinkan resize secara vertikal saja */
+}
+
+.perihal:focus {
+    outline: none; /* Menghapus outline default */
+}
+
+.content .input-box textarea:focus,
+.content .input-box textarea:valid {
+    border-color: #4070f4; /* Ganti warna border saat fokus */
+    background-color: #fff; /* Warna latar saat fokus */
+}
+
+.input-with-icon .search-icon {
+    position: absolute;
+    top: 50%; /* Posisikan vertikal di tengah */
+    transform: translateY(-50%); /* Pusatkan secara vertikal */
+    color: #aaa;
+}
+
+@media screen and (max-width: 1100px) {
+    .navbar {
+        left: 65%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .sidebar {
+        left: 0;
+        z-index: 1000;
+    }
+    
+    .sidebar.close {
+        left: -100%;
+    }
+    
+    .navbar {
+        left: 0;
+        max-width: 100%;
+        transform: translateX(0%);
+    }
+}

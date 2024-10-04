@@ -1,0 +1,277 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+body {
+    min-height: 100vh;
+    background: #eef5fe;
+}
+.flex {
+    display: flex;
+    align-items: center;
+}
+.nav_image {
+    display: flex;
+    min-width: 55px;
+    justify-content: center;
+}
+.nav_image img {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 270px;
+    background: #ffffff;
+    padding: 15px 10px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease-in-out; /* Perhalus transisi sidebar */
+}
+.sidebar.close {
+    width: calc(55px + 20px);
+}
+.logo_items {
+    gap: 8px;
+}
+.logo_name {
+    font-size: 22px;
+    color: #333;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.sidebar.close .logo_name,
+.sidebar.close #hamburger-icon,
+.sidebar.close #sidebar-close {
+    opacity: 0;
+    pointer-events: none;
+}
+#hamburger-icon,
+#sidebar-close {
+    padding: 10px;
+    margin-left: 5px;
+    color: #000;
+    font-size: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.menu_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 20px;
+    overflow-y: auto;
+    height: calc(100% - 82px);
+}
+.menu_container::-webkit-scrollbar {
+    display: none;
+}
+.menu_title {
+    position: relative;
+    height: 50px;
+    width: 55px;
+}
+.menu_title .title {
+    margin-left: 15px;
+    transition: all 0.3s ease;
+}
+.sidebar.close .title {
+    opacity: 0;
+}
+.menu_title .line {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 3px;
+    width: 20px;
+    border-radius: 25px;
+    background: #aaa;
+    transition: all 0.3s ease;
+}
+.menu_title .line {
+    opacity: 0;
+}
+.sidebar.close .line {
+    opacity: 1;
+}
+.item {
+    list-style: none;
+}
+.link {
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    color: #707070;
+}
+.link:hover {
+    color: #fff;
+    background-color: #4070f4;
+}
+.link span {
+    white-space: nowrap;
+}
+.link i {
+    height: 50px;
+    min-width: 55px;
+    display: flex;
+    font-size: 22px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.sidebar_profile {
+    display: flex;
+    align-items: center;
+    padding-top: 15px;
+    margin-top: 15px;
+    gap: 10px; 
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+.sidebar_profile .data_text .email {
+    font-size: 12px; /* Ubah ukuran font sesuai kebutuhan */
+    color: #707070; /* Sesuaikan warna jika perlu */
+}
+
+
+.data_text {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    z-index: 10;
+    max-width: 100%;
+    width: calc(100% - 270px);
+    position: fixed;
+    top: 0;
+    left: 270px;
+    background: #4070f4;
+    padding: 10px 20px;
+    justify-content: space-between;
+    transition: left 0.3s ease-in-out, width 0.3s ease-in-out; /* Perhalus transisi */
+}
+.search_box {
+    height: 46px;
+    max-width: 500px;
+    width: 100%;
+    border: 1px solid #aaa;
+    outline: none;
+    border-radius: 8px;
+    padding: 0 15px;
+    font-size: 18px;
+    color: #333;
+}
+.navbar img {
+    height: 40px;
+    width: 40px;
+    margin-left: 20px;
+}
+
+.card-container {
+    display: flex;
+    gap: 20px;
+    transition: margin-left 0.3s ease-in-out; /* Perhalus transisi */
+    margin-top: 90px; 
+    margin-left: 270px; 
+}
+
+.card {
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    text-align: center;
+}
+
+.card h2 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+.card p {
+    font-size: 18px;
+}
+
+.card a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px; 
+    border-radius: 5px; 
+    transition: color 0.3s ease, transform 0.3s ease; 
+}
+
+.card a:hover {
+    color: #0056b3; 
+    transform: translateY(-2px); 
+}
+
+.card.blue {
+    background-color: #2196F3;
+    color: white;
+}
+
+.card.yellow {
+    background-color: #FFC107;
+    color: white;
+}
+
+.table-container {
+    margin-top: 20px;
+    overflow-x: auto; 
+    transition: margin-left 0.3s ease-in-out; 
+    margin-left: 270px; 
+}
+.sidebar.close ~ .table-container, 
+.sidebar.close ~ .card-container {
+    margin-left: 75px; 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+@media screen and (max-width: 1100px) {
+    .navbar {
+        left: 65%;
+    }
+}
+@media screen and (max-width: 800px) {
+    .sidebar {
+        left: 0;
+        z-index: 1000;
+    }
+    .sidebar.close {
+        left: -100%;
+    }
+    .navbar {
+        left: 0;
+        max-width: 100%;
+        transform: translateX(0%);
+    }
+}
