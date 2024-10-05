@@ -1,6 +1,7 @@
+/* Import Font */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;500;600;700&display=swap");
 
-/* Reset default margin and padding, set box-sizing */
+/* Global Reset */
 * {
   margin: 0;
   padding: 0;
@@ -8,7 +9,7 @@
   font-family: "Open Sans", sans-serif;
 }
 
-/* Style untuk body halaman */
+/* Body Style */
 body {
   display: flex;
   align-items: center;
@@ -16,79 +17,97 @@ body {
   min-height: 100vh;
   width: 100%;
   padding: 0 10px;
-  background: url(/projectdesa/img/10515253.png);
-  background-position: center;
-  background-size: cover;
+  background: url(/projectdesa/img/10515253.png) center/cover no-repeat;
   position: relative;
 }
 
-/* Style untuk wrapper */
+/* Wrapper Style */
 .wrapper {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  width: 760px;
+  max-width: 800px;
+  width: 100%;
   border: 3px solid #6ebdfdc7;
   box-shadow: 0 0 30px #64b5f6;
   border-radius: 8px;
-  padding: 8px;
-  text-align: center;
+  padding: 20px;
+  margin: 20px auto;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(9px);
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -o-border-radius: 8px;
 }
 
-.wrapper .left,
-.wrapper .login-wrapper {
+/* Left Section */
+.wrapper .left {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-}
-
-/* .wrapper .login-wrapper{
-  width: 500px;
-  height: auto;
-} */
-
-.wrapper .left h2 {
-  margin: 15px;
-  color: #6a6565;
-  background-color: #ffff;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
 }
 
 .wrapper .left img {
-  width: 200px;
+  width: 150px;
   height: auto;
   margin: 15px;
 }
 
-/* Style untuk form */
-form {
-  /* width: 510px; */
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
+.wrapper .left h2 {
+  margin: 1.8rem;
+  color: #6a6565;
+  margin: 10px 0;
 }
 
-/* Style untuk heading */
+.wrapper .left p {
+  font-size: 1rem; /* Ukuran teks yang sesuai */
+  color: #6a6565;
+  margin: 10px 0; /* Jarak antar elemen */
+  line-height: 1.5; /* Line height agar lebih mudah dibaca */
+  max-width: 250px; /* Membatasi lebar teks */
+}
+
+/* Registration Wrapper */
+.registrasi-wrapper .registrasi {
+  width: 250px;
+}
+
+/* Login Wrapper */
+.login-wrapper {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+}
+
+/* Text Styling */
 h1 {
   font-size: 2rem;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: #6a6565;
 }
 
-/* Style untuk input field */
+.login-wrapper p {
+  width: 100%;
+}
+
+/* Input Field Styling */
 .input-field {
   position: relative;
   border-bottom: 2px solid #ccc;
   margin: 10px 0;
 }
 
-/* Style untuk label di dalam input field */
+.input-field input {
+  width: 100%;
+  height: 30px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #6a6565;
+}
+
+/* Label for Input Field */
 .input-field label {
   position: absolute;
   top: 50%;
@@ -98,40 +117,17 @@ h1 {
   font-size: 12px;
   pointer-events: none;
   transition: 0.15s ease;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  -webkit-transition: 0.15s ease;
-  -moz-transition: 0.15s ease;
-  -ms-transition: 0.15s ease;
-  -o-transition: 0.15s ease;
 }
 
-/* Style untuk input field */
-.input-field input {
-  width: 100%;
-  height: 30px;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: 20px;
-  color: #6a6565;
-}
-
-/* Style saat input dalam fokus */
+/* Input Focus and Validation */
 .input-field input:focus~label,
 .input-field input:valid~label {
   font-size: 0.8rem;
   top: 10px;
   transform: translateY(-120%);
-  -webkit-transform: translateY(-120%);
-  -moz-transform: translateY(-120%);
-  -ms-transform: translateY(-120%);
-  -o-transform: translateY(-120%);
 }
 
-/* Style untuk toggle password icon */
+/* Toggle Password Icon */
 .input-field .toggle-password {
   position: absolute;
   right: 10px;
@@ -139,116 +135,69 @@ h1 {
   transform: translateY(-50%);
   color: #6a6565;
   cursor: pointer;
-  font-size: 16px;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
+  font-size: 14px;
 }
 
-/* Style untuk feedback password */
+/* Feedback Styling */
 .password-feedback {
   font-size: 15px;
   margin: 5px 0;
   transition: color 0.3s ease;
-  /* Transisi real-time untuk warna feedback */
-  -webkit-transition: color 0.3s ease;
-  -moz-transition: color 0.3s ease;
-  -ms-transition: color 0.3s ease;
-  -o-transition: color 0.3s ease;
 }
 
-/* Style untuk alert */
-.alert,
-.success {
-  height: 68px;
-  width: 100%;
-  margin: 16px 0;
-  position: relative;
+/* Alert Messages */
+.alert, .success {
   display: flex;
   align-items: center;
   padding: 10px;
-  /* Tambahkan padding untuk jarak di dalam alert */
+  margin: 16px 0;
   border-radius: 6px;
-  /* Rounded corners */
   display: none;
-  /* Hidden by default */
 }
 
 .alert {
   background: #6a6565;
-  /*Background alert*/
 }
 
-.alert .error {
-  color: #D93025;
-  font-size: 18px;
-  margin-right: 10px;
-  /* Jarak antara ikon dan teks */
-}
-
-.alert .text {
-  font-size: 16px;
+.alert .error, .alert .text {
   color: #D93025;
 }
 
-/* Style untuk success message */
 .success {
-  /* height: 68px;
-  width: 100%;
-  margin: 16px 0;
-  position: relative;
-  display: flex;
-  align-items: center; */
   background: #6a6565;
-  /* Background success */
-  /* padding: 10px; /* Tambahkan padding untuk jarak di dalam success */
-  /* border-radius: 6px; Rounded corners */
-  /* display: none; Hidden by default */
 }
 
-.success .success-icon {
-  color: #28a745;
-  font-size: 18px;
-  margin-right: 10px;
-  /* Jarak antara ikon dan teks */
-}
-
-.success .text {
-  font-size: 16px;
+.success .success-icon, .success .text {
   color: #28a745;
 }
 
-/* Style untuk forget section */
+/* Forget Section */
 .forget {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 10px;
-  margin: 20px 0;
+  font-size: 14px;
+  margin: 15px 0;
   color: #6a6565;
 }
 
-/* Menghilangkan garis bawah pada link */
-.forget a,
-.register a {
+.forget a, .register a {
   font-size: 12px;
   color: #6a6565;
   text-decoration: none;
-  /* Menghilangkan garis bawah */
   transition: color 0.3s ease;
-  /* Transisi real-time untuk hover */
 }
 
-.forget a:hover,
-.register a:hover {
-  color: #6a6565;
-  /* Warna saat hover */
+/* Hover Effect for Links */
+.forget a:hover, .register a:hover {
+  color: #fff;
+  background: linear-gradient(45deg, #64b5f6, #1e88e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-decoration: underline;
-  /* Menambahkan underline saat hover */
 }
 
-/* Style untuk checkbox remember */
+/* Remember Me Checkbox */
 #remember {
   accent-color: #6a6565;
 }
@@ -257,60 +206,40 @@ h1 {
   display: flex;
   align-items: center;
   cursor: pointer;
-  /* Menambahkan cursor pointer untuk label */
 }
 
 .forget label p {
   margin-left: 5px;
 }
 
-#login {
-  margin-inline-start: auto;
-}
-
-.register-feedback {
-  margin: 5px;
-}
-
-/* Style untuk button */
+/* Button Styling */
 button {
-  width: 100%;
-  background: transparent;
+  max-width: 300px;
+  background: linear-gradient(45deg, #90caf9, #64b5f6);
   color: #6a6565;
-  font-weight: 600;
+  font-weight: bold;
   padding: 10px;
-  border-color: #fff;
-  cursor: pointer;
+  border: none;
   border-radius: 3px;
   font-size: 16px;
-  border: none;
+  cursor: pointer;
   box-shadow: 0 0 50px rgba(44, 43, 43, 0.2);
   transition: 0.3s ease;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
 }
 
-/* Style saat button dalam hover */
 button:hover {
-  width: 100%;
+  background: linear-gradient(45deg, #64b5f6, #1e88e5);
   color: #fff;
-  background: #90caf9;
+  box-shadow: 0 0 50px rgba(44, 43, 43, 0.2);
 }
 
-/* Style untuk register section */
+/* Registration Section */
 .register {
   color: #6a6565;
+  margin: 15px 0;
 }
 
 .register p {
-  color: #6a6565;
-  text-decoration: none;
   font-weight: 600;
+  color: #6a6565;
 }
-
-.register p a:hover {
-  text-decoration: underline;
-}
-

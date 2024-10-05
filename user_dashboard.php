@@ -9,6 +9,22 @@ if (!isset($_SESSION["login"])) {
 require 'db_connect.php';
 require 'functions.php';
 
+// pagination
+// konfigurasi
+$jumlahDataPerhalaman = 2;
+$jumlahData = count(query("SELECT * FROM pending_users"));
+$jumlahHalaman = ceil($jumlahData / $jumlahDataPerhalaman);
+$halamanAktif = ( isset($_GET["halaman"]) ) ? (int) $_GET["halaman"] : 1;
+$awalData = ( $jumlahDataPerhalaman * $halamanAktif ) - $jumlahDataPerhalaman;
+
+// panggil query data mahasiswa yang di simpan ke variable mahasiswa
+$result = query("SELECT * FROM pending_users LIMIT $awalData, $jumlahDataPerhalaman");
+
+// tombol cari di tekan
+if ( isset($_POST["cari"]) ){
+    $result = cari($_POST["keyword"]);
+}
+
 ?>
 
 <!-- <!DOCTYPE html>
@@ -269,51 +285,7 @@ require 'functions.php';
     <link rel="stylesheet" href="/projectdesa/dashboard.css" />
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <style>
-        /* CSS tambahan untuk efek hover */
-        .clickable-header {
-            text-decoration: none;
-            color: inherit;
-            transition: color 0.3s ease;
-        }
-
-        .clickable-header:hover {
-            color: #4070f4;
-        }
-
-        .hoverable-header {
-            transition: background-color 0.3s ease;
-        }
-
-        .hoverable-header:hover {
-            background-color: #f1f1f1;
-        }
-
-        .content-class {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-        }
-
-        .input-with-icon {
-            position: relative;
-            display: flex; /* Menggunakan flex untuk tata letak */
-            align-items: center; /* Rata tengah secara vertikal */
-        }
-
-        .input-with-icon .search-icon {
-            position: absolute;
-            right: 10px; /* Jarak dari kanan */
-            top: 50%; /* Posisikan vertikal di tengah */
-            transform: translateY(-50%); /* Pusatkan secara vertikal */
-            color: #aaa;
-        }
-
-        .input-with-icon input {
-            padding-right: 30px; /* Tambah padding untuk ruang ikon */
-        }
-    </style>
+    
 </head>
 
 <body>
@@ -440,6 +412,24 @@ require 'functions.php';
             </tbody>
         </table>
     </div>
+
+    <!-- navigasi -->
+
+    <?php if ( $halamanAktif > 1 ) : ?>
+    <a href="?halaman=<?= $halamanAktif -1; ?>">&laquo;</a>
+    <?php endif; ?>
+
+    <?php for (  $i = 1; $i <= $jumlahHalaman; $i++) : ?>
+        <?php if ( $i == $halamanAktif ) : ?>
+            <a href="?halaman=<?= $i; ?>" style="font-weight: bold; color: red;"><?= $i ?> </a>
+        <?php else : ?>
+            <a href="?halaman=<?= $i; ?>"><?= $i ?> </a>
+        <?php endif; ?>    
+    <?php endfor; ?>
+
+    <?php if ( $halamanAktif < $jumlahHalaman ) : ?>
+    <a href="?halaman=<?= $halamanAktif +1; ?>">&raquo;</a>
+    <?php endif; ?>
 
     <script>
         const sidebar = document.querySelector(".sidebar");

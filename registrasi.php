@@ -56,30 +56,37 @@ if (isset($_POST["register"])) {
 
         <div class="left">
             <img src="/projectdesa/img/logo-kabupaten-karawang.png" alt="">
-            <h2>DESA KUTAPOHACI</h2>
+             <h2>Selamat Datang di Desa Kutapohaci</h2>
+            <p>Kami senang menyambut Anda! Silakan registrasi untuk menjadi bagian dari kami.</p>
         </div>
 
-        <div class="registrasi-wrapper">
+        <div class="login-wrapper">
             <form action="" method="post" class="registrasi">
-                <h1 class=" login-text">Daftar</h1>
+                <h1 class="login-text">Daftar</h1>
+                <p>Selamat datang di Portal Pendaftaran. <br>Silakan isi formulir di bawah ini untuk membuat akun baru!</p>
+                
                 <div class="input-field">
                     <input type="text" id="username" name="username" autocomplete="on" required>
                     <label for="username">Username</label>
                 </div>
+                
                 <div class="input-field">
-                    <input type="text" id="email" name="email" autocomplete="on" required> <!-- Tambahkan input email -->
+                    <input type="email" id="email" name="email" autocomplete="on" required> <!-- Tambahkan input email -->
                     <label for="email">Email</label>
                 </div>
-                <div class="input-field">
+                
+                <div class="input-field password-field">
                     <input type="password" id="password" name="password" required>
                     <label for="password">Password</label>
-                    <i id="register-password-icon" class="fas fa-eye toggle-password" onclick="togglePasswordVisibility('password','password-toggle')"></i>
+                    <i id="password-toggle" class="fas fa-eye toggle-password" onclick="togglePasswordVisibility('password','password-toggle')"></i>
                 </div>
-                <div class="input-field">
+                
+                <div class="input-field password-field">
                     <input type="password" id="password2" name="password2" required>
                     <label for="password2">Confirm Password</label>
-                    <i id="register-password-icon" class="fas fa-eye toggle-password" onclick="togglePasswordVisibility('password2','password2-toggle')"></i>
+                    <i id="password2-toggle" class="fas fa-eye toggle-password" onclick="togglePasswordVisibility('password2','password2-toggle')"></i>
                 </div>
+                
                 <div class="register-feedback"></div>
                 <div>
                     <button type="submit" name="register">Daftar</button>
@@ -89,9 +96,9 @@ if (isset($_POST["register"])) {
                     <p>Sudah Punya Akun? <a href="/projectdesa/login.php">Login</a></p>
 
                 </div>
-        </div>
 
-        </form>
+            </form>
+        </div>
     </div>
     <script>
         function togglePasswordVisibility(fieldId, toggleId) {

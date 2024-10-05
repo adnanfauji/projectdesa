@@ -275,3 +275,47 @@ tr:hover {
         transform: translateX(0%);
     }
 }
+
+ /* CSS tambahan untuk efek hover */
+ .clickable-header {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+.clickable-header:hover {
+    color: #4070f4;
+}
+
+.hoverable-header {
+    transition: background-color 0.3s ease;
+}
+
+.hoverable-header:hover {
+    background-color: #f1f1f1;
+}
+
+.content-class {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex; /* Menggunakan flex untuk tata letak */
+    align-items: center; /* Rata tengah secara vertikal */
+}
+
+.input-with-icon .search-icon {
+    position: absolute;
+    right: 10px; /* Jarak dari kanan */
+    top: 50%; /* Posisikan vertikal di tengah */
+    transform: translateY(-50%); /* Pusatkan secara vertikal */
+    color: #aaa;
+}
+
+.input-with-icon input {
+    padding-right: 30px; /* Tambah padding untuk ruang ikon */
+}

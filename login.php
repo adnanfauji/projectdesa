@@ -3,6 +3,8 @@ session_start();
 require 'db_connect.php';
 require 'functions.php';
 
+$error = false;
+
 // cek cookie
 if (isset($_COOKIE['id']) && isset($_COOKIE['key'])) {
     $id = $_COOKIE['id'];
@@ -90,11 +92,13 @@ if (isset($_POST["login"])) {
         <div class="left">
             <img src="/projectdesa/img/logo-kabupaten-karawang.png" alt="">
             <h2>DESA KUTAPOHACI</h2>
+            <p>Selamat datang di Desa Kutapohaci! Bersama kita membangun desa yang lebih baik.</p>
         </div>
 
         <div class="login-wrapper">
             <form action="" method="post">
-                <h1>Login</h1>
+                <h1>Selamat Datang</h1>
+                <p>Silakan masukkan <strong>username</strong> dan <strong>password</strong> Anda untuk login ke portal ini.</p>
                 <div class="input-field">
                     <input type="text" id="login-email" name="username" autocomplete="on" required>
                     <label for="login-email">Enter your username</label>
@@ -118,6 +122,11 @@ if (isset($_POST["login"])) {
                         <button type="submit" name="login" id="login" class="login">Log In</button>
                     </a>
                 </div>
+
+                <?php if ($error): ?>
+
+                    <div class="error">Username atau password salah.</div>
+                <?php endif; ?>
 
                 <div class="register">
                     <p>Don't have an account? <a href="/projectdesa/registrasi.php">Register</a></p>
