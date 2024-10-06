@@ -82,11 +82,13 @@ body {
 /* Text Styling */
 h1 {
   font-size: 2rem;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
   color: #6a6565;
 }
 
 .login-wrapper p {
+  font-size: 14px;
+  margin-bottom: 25px;
   width: 100%;
 }
 
@@ -192,7 +194,7 @@ h1 {
 .forget a:hover, .register a:hover {
   color: #fff;
   background: linear-gradient(45deg, #64b5f6, #1e88e5);
-  -webkit-background-clip: text;
+  /* -webkit-background-clip: text; */
   -webkit-text-fill-color: transparent;
   text-decoration: underline;
 }
@@ -215,7 +217,7 @@ h1 {
 /* Button Styling */
 button {
   max-width: 300px;
-  background: linear-gradient(45deg, #90caf9, #64b5f6);
+  background: linear-gradient(45deg, #b4d0e7, #64b5f6);
   color: #6a6565;
   font-weight: bold;
   padding: 10px;
@@ -228,7 +230,7 @@ button {
 }
 
 button:hover {
-  background: linear-gradient(45deg, #64b5f6, #1e88e5);
+  background: linear-gradient(45deg, #b4d0e7, #1e88e5);
   color: #fff;
   box-shadow: 0 0 50px rgba(44, 43, 43, 0.2);
 }

@@ -18,7 +18,7 @@
 <body>
     <div class="wrapper">
         <div class="left">
-                <img src="/projectdesa/img/contact.png" alt=""/>
+                <img src="/projectdesa/img/forgotnew.png" alt=""/>
                 <p>Setelah Anda mendapatkan tautan, klik pada tautan tersebut<br> dan  ikuti instruksi untuk membuat kata sandi baru.</p>
             </div>
             <form action="" method="post" class="login-wrapper" onsubmit="handleSubmit(event)">
