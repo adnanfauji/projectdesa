@@ -71,7 +71,7 @@
     //       JOIN Formulir f ON pg.id_pengajuan = f.id_pengajuan";
     // $result = mysqli_query($connect, $query);
 
-    // Query untuk menghitung jumlah pengajuan berdasarkan status
+    // // Query untuk menghitung jumlah pengajuan berdasarkan status
     // $query_pending = "SELECT COUNT(*) as total_pending FROM Pengajuan WHERE status_pengajuan = 'Pending'";
     // $query_approved = "SELECT COUNT(*) as total_approved FROM Pengajuan WHERE status_pengajuan = 'Approved'";
     // $query_rejected = "SELECT COUNT(*) as total_rejected FROM Pengajuan WHERE status_pengajuan = 'Rejected'";
@@ -80,20 +80,20 @@
     // $result_approved = mysqli_query($connect, $query_approved);
     // $result_rejected = mysqli_query($connect, $query_rejected);
 
-    // Ambil hasil query
+    // // Ambil hasil query
     // $row_pending = mysqli_fetch_assoc($result_pending);
     // $row_approved = mysqli_fetch_assoc($result_approved);
     // $row_rejected = mysqli_fetch_assoc($result_rejected);
 
-    // Ambil jumlah masing-masing status
+    // // Ambil jumlah masing-masing status
     // $total_pending = $row_pending['total_pending'];
     // $total_approved = $row_approved['total_approved'];
     // $total_rejected = $row_rejected['total_rejected'];
 
-    // Ambil pengguna pending
+    // // Ambil pengguna pending
     // $pendingUsers = getPendingUsers();
 
-    // Ambil pengguna yang disetujui
+    // // Ambil pengguna yang disetujui
     // $approvedUsers = getApprovedUsers();
     ?>
 

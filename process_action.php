@@ -23,6 +23,7 @@ if (isset($_POST['id_pengajuan']) && isset($_POST['action'])) {
     if ($result) {
       // Tampilkan SweetAlert untuk pengajuan yang disetujui
       echo "
+      <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
             <script>
               Swal.fire({
                   icon: 'success',
@@ -39,6 +40,7 @@ if (isset($_POST['id_pengajuan']) && isset($_POST['action'])) {
     } else {
       // Tampilkan SweetAlert jika gagal
       echo "
+      <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
             <script>
               Swal.fire({
                   icon: 'error',
@@ -62,6 +64,7 @@ if (isset($_POST['id_pengajuan']) && isset($_POST['action'])) {
     if ($result) {
       // Tampilkan SweetAlert untuk pengajuan yang ditolak
       echo "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
             <script>
               Swal.fire({
                   icon: 'success',
@@ -78,6 +81,7 @@ if (isset($_POST['id_pengajuan']) && isset($_POST['action'])) {
     } else {
       // Tampilkan SweetAlert jika gagal
       echo "
+       <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
             <script>
               Swal.fire({
                   icon: 'error',

@@ -13,7 +13,7 @@ if (!isset($_SESSION["username"])) {
 $username = $_SESSION["username"];
 
 // Query untuk mendapatkan data user berdasarkan username
-$query_user = "SELECT username, email FROM user WHERE username = ?";
+$query_user = "SELECT username, email, profile_picture FROM user WHERE username = ?";
 $stmt = $connect->prepare($query_user);
 $stmt->bind_param("s", $username);
 $stmt->execute();
@@ -24,9 +24,11 @@ if ($result_user->num_rows > 0) {
     $user_data = $result_user->fetch_assoc();
     $display_username = $user_data['username'];
     $display_email = $user_data['email'];
+    $display_profile_picture = $user_data['profile_picture'];
 } else {
     $display_username = "Guest";
     $display_email = "guest@example.com";
+    $display_email = "image";
 }
 
 ?>
@@ -102,7 +104,7 @@ if ($result_user->num_rows > 0) {
                         <a href="backup_menu.php" class="link flex"><i class="bx bx-cloud"></i><span>Backup & Restore</span></a>
                     </li>
                     <li class="item">
-                        <a href="#" class="link flex"><i class="bx bx-cog"></i><span>Setting</span></a>
+                        <a href="pengaturan.php" class="link flex"><i class="bx bx-cog"></i><span>Setting</span></a>
                     </li>
                     <li class="item">
                         <a href="logout.php" class="link flex"><i class="bx bx-log-out"></i><span>Log Out</span></a>
@@ -133,7 +135,7 @@ if ($result_user->num_rows > 0) {
                 <span class="email"><?php echo htmlspecialchars($display_email); ?></span>
             </div>
             <span class="nav_image">
-                <img src="/projectdesa/img/logo_example.jpeg" alt="logo_img" />
+                <img src="<?php echo htmlspecialchars($display_profile_picture); ?>" alt="logo_img" />
             </span>
         </div>
     </nav>
