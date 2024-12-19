@@ -1,279 +1,79 @@
 <?php
-
 session_start();
-
-if (!isset($_SESSION["login"])) {
-    header("Location: login.php");
-    exit;
-}
 require 'db_connect.php';
 require 'functions.php';
 
-// pagination
-// konfigurasi
-$jumlahDataPerhalaman = 2;
-$jumlahData = count(query("SELECT * FROM pending_users"));
-$jumlahHalaman = ceil($jumlahData / $jumlahDataPerhalaman);
-$halamanAktif = ( isset($_GET["halaman"]) ) ? (int) $_GET["halaman"] : 1;
-$awalData = ( $jumlahDataPerhalaman * $halamanAktif ) - $jumlahDataPerhalaman;
-
-// panggil query data mahasiswa yang di simpan ke variable mahasiswa
-$result = query("SELECT * FROM pending_users LIMIT $awalData, $jumlahDataPerhalaman");
-
-// tombol cari di tekan
-if ( isset($_POST["cari"]) ){
-    $result = cari($_POST["keyword"]);
+// Redirect jika user tidak login
+if (!isset($_SESSION["username"])) {
+    header("Location: index.php");
+    exit;
 }
+
+// Ambil username dari sesi
+$username = $_SESSION["username"];
+
+// Query untuk mendapatkan data user berdasarkan username
+$query_user = "SELECT username, email FROM user WHERE username = ?";
+$stmt = $connect->prepare($query_user);
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result_user = $stmt->get_result();
+
+// Periksa apakah data user ditemukan
+if ($result_user->num_rows > 0) {
+    $user_data = $result_user->fetch_assoc();
+    $display_username = $user_data['username'];
+    $display_email = $user_data['email'];
+} else {
+    $display_username = "Guest";
+    $display_email = "guest@example.com";
+}
+
+
+// Query untuk mendapatkan data pengajuan yang sudah diproses
+$query = "SELECT p.id_pengajuan, f.tipe_formulir, p.tanggal_pengajuan, p.status_pengajuan
+          FROM pengajuan p
+          JOIN formulir f ON p.id_pengajuan = f.id_formulir
+          WHERE p.status_pengajuan IN ('Pending', 'Approved', 'Rejected')";
+
+$result = mysqli_query($connect, $query);
+
+// Fungsi untuk mengambil data berdasarkan status pengajuan
+function getPengajuanByStatus($connect, $status)
+{
+    $query = "SELECT p.nama_penduduk, pg.id_pengajuan, pg.tanggal_pengajuan, pg.status_pengajuan, f.tipe_formulir
+          FROM Penduduk p
+          JOIN Pengajuan pg ON p.nik_penduduk = pg.nik_penduduk
+          JOIN Formulir f ON pg.id_pengajuan = f.id_pengajuan
+          WHERE pg.status_pengajuan = ?";
+    $stmt = $connect->prepare($query);
+    $stmt->bind_param('s', $status);
+    $stmt->execute();
+    return $stmt->get_result();
+}
+
+// Hitung jumlah pengajuan berdasarkan status
+function countPengajuanByStatus($connect, $status)
+{
+    $query = "SELECT COUNT(*) as total FROM Pengajuan WHERE status_pengajuan = ?";
+    $stmt = $connect->prepare($query);
+    $stmt->bind_param('s', $status);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc()['total'];
+}
+
+// Ambil data jumlah pengajuan
+$total_pending = countPengajuanByStatus($connect, 'Pending');
+$total_approved = countPengajuanByStatus($connect, 'Approved');
+$total_rejected = countPengajuanByStatus($connect, 'Rejected');
+
+// Status default atau status dari request
+$status_filter = $_GET['status'] ?? 'Pending';
+$filtered_pengajuan = getPengajuanByStatus($connect, $status_filter);
 
 ?>
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-<!-- stylesheet -->
-<!-- <link
-        rel="stylesheet" href="/projectdesa/style.css" /> -->
-<!-- memanggil file javascript / main.js -->
-<!-- <script src="/projectdesa/JS/main.js"></script> -->
-<!-- ionicons -->
-<!-- <script
-        type="module"
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script
-        nomodule
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-</head> -->
-
-<!-- <body>
-
-    <div>
-        <header>
-            <h1>SISTEM INFORMASI ADMINISTRASI KEPENDUDUKAN</h1>
-        </header>
-        <div>
-            <aside>
-                <ul>
-                    <li><a href="">Dashboard</a>
-                        <ul>
-                            <li><a href="">Surat Masuk</a></li>
-                            <li><a href="">Surat Keluar</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="">Buat Surat Baru</a></li>
-                    <li><a href="">Arsip Surat Masuk</a></li>
-                    <li><a href="">Arsip Surat Keluar</a></li>
-                    <li><a href="">Laporan</a></li>
-                    <li><a href="">Jadwal Desa</a></li>
-                    <li><a href="">Database Backup</a></li>
-                    <li><a href="/projectdesa/Test/testlogout.php" class="logout">logout</a></li>
-                </ul>
-            </aside>
-            <main>
-                <p>Main Content</p>
-            </main>
-        </div>
-        <footer>
-            <p>Footer</p>
-        </footer>
-    </div>
-</body> -->
-
-<!-- </html>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title> -->
-<!-- stylesheet -->
-<!-- <link
-        rel="stylesheet"
-        href="/web_programming2024/si2b-adnanfauji/web_projectclass/pertemuan3/admin.css" /> -->
-<!-- memanggil file javascript / main.js -->
-<!-- <script src="/web_programming2024/si2b-adnanfauji/web_projectclass/pertemuan3/main.js"></script> -->
-<!-- ionicons -->
-<!-- <script
-        type="module"
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script
-        nomodule
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-</head>
-
-<body> -->
-<!-- navigation -->
-<!-- <div class="container">
-        <div class="navigation">
-            <ul>
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="school-outline"></ion-icon>
-                        </span>
-                        <span class="title">Desa Kutapohaci</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="home-outline"></ion-icon>
-                        </span>
-                        <span class="title">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="add-outline"></ion-icon>
-                        </span>
-                        <span class="title">Buat Surat Baru</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="mail-outline"></ion-icon>
-                        </span>
-                        <span class="title">Surat Masuk</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="paper-plane-outline"></ion-icon>
-                        </span>
-                        <span class="title">Surat Keluar</span>
-                    </a>
-                </li>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="archive-outline"></ion-icon>
-                        </span>
-                        <span class="title">Arsip Surat Masuk</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="document-outline"></ion-icon>
-                        </span>
-                        <span class="title">Laporan</span>
-                    </a>
-                </li> -->
-<!-- <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="chatbubble-outline"></ion-icon>
-                        </span>
-                        <span class="title">Message</span>
-                    </a>
-                </li> -->
-<!-- <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="server-outline"></ion-icon>
-                        </span>
-                        <span class="title">Backup & Restore</span>
-                    </a>
-                </li> -->
-<!-- <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="settings-outline"></ion-icon>
-                        </span>
-                        <span class="title">Setting</span>
-                    </a>
-                </li> -->
-<!-- <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                        <span class="title">Password</span>
-                    </a>
-                </li> -->
-<!-- <li>
-                    <a href="/projectdesa/Test/testlogout.php">
-                        <span class="icon">
-                            <ion-icon name="log-out-outline"></ion-icon>
-                        </span>
-                        <span class="title">Sign Out</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="main">
-            <div class="topbar">
-                <div class="toggle">
-                    <ion-icon name="menu-outline"></ion-icon>
-                </div>
-                <div class="search">
-                    <label>
-                        <input type="text" placeholder="search here" />
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
-                </div>
-                <div class="user">
-                    <img
-                        src="/web_programming2024/si2b-adnanfauji/web_projectclass/pertemuan3/img/user-avatar.png"
-                        alt="" />
-                </div>
-            </div> -->
-<!-- ======= card ===== -->
-<!-- <div class="cardBox">
-                <div class="card">
-                    <div>
-                        <div class="number">1.504</div>
-                        <div class="cardName">Surat Masuk</div>
-                    </div>
-
-                    <div class="iconBox">
-                        <ion-icon name="mail-outline"></ion-icon>
-                    </div>
-                </div>
-                <div class="card">
-                    <div>
-                        <div class="number">1.080</div>
-                        <div class="cardName">Surat Keluar</div>
-                    </div>
-                    <div class="iconBox">
-                        <ion-icon name="mail-open-outline"></ion-icon>
-                    </div>
-                </div> -->
-<!-- <div class="card">
-                    <div>
-                        <div class="number">284</div>
-                        <div class="cardName">Comments</div>
-                    </div>
-                    <div class="iconBox">
-                        <ion-icon name="chatbubble-outline"></ion-icon>
-                    </div>
-                </div>
-                <div class="card">
-                    <div>
-                        <div class="number">$3.84</div>
-                        <div class="cardName">Earnings</div>
-                    </div>
-
-                    <div class="iconBox"><ion-icon name="cash-outline"></ion-icon></div>
-                </div> -->
-<!-- </div>
-        </div>
-    </div>
-</body>
-
-</html> -->
-
-
-
-<!-- Part 3.1 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -283,153 +83,167 @@ if ( isset($_POST["cari"]) ){
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
     <link rel="stylesheet" href="/projectdesa/dashboard.css" />
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+    <!-- 
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" /> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    
+
 </head>
 
 <body>
+
     <nav class="sidebar locked">
-        <div class="logo_items flex">
-            <span class="nav_image"><img src="/projectdesa/img/logo.png" style="width: 100px; height:50px" alt="logo_img" /></span>
+        <!-- <div class="logo_items flex">
+            <span class="nav_image"><img src="img/logo_sinapen.png" alt="logo_img" /></span>
             <span class="logo_name">SINAPEN</span>
-        </div>
+        </div> -->
         <div class="menu_container">
             <div class="menu_items">
                 <ul class="menu_item">
-                    <div class="menu_title flex">
+                    <i class="bx bx-menu" id="hamburger-icon" title="Menu"></i>
+                    <!-- <div class="menu_title flex">
                         <span class="title">Dashboard</span>
                         <span class="line"></span>
-                    </div>
+                    </div> -->
                     <li class="item">
-                        <a href="/projectdesa/user_dashboard.php" class="link flex"><i class="bx bx-home-alt"></i><span>Home</span></a>
+                        <a href="user_dashboard.php" class="link flex"><i class="bx bx-home-alt"></i><span>Home</span></a>
                     </li>
                     <li class="item">
-                        <a href="/projectdesa/buat_surat.php" class="link flex"><i class="fas fa-plus-circle"></i><span>Tambah Surat</span></a>
+                        <a href="buat_surat.php" class="link flex"><i class="fas fa-plus-circle"></i><span>Tambah Surat</span></a>
                     </li>
                     <li class="item">
-                        <a href="#" class="link flex"><i class="bx bx-mail-send"></i><span>Surat Masuk</span></a>
+                        <a href="arsip_sm.php" class="link flex"><i class="bx bx-mail-send"></i><span>Permohonan Surat</span></a>
                     </li>
-                    <li class="item">
-                        <a href="#" class="link flex"><i class="bx bx-paper-plane"></i><span>Surat Keluar</span></a>
-                    </li>
+                    <!-- <li class="item">
+                        <a href="arsip_sk.html" class="link flex"><i class="bx bx-paper-plane"></i><span>Surat Keluar</span></a>
+                    </li> -->
                 </ul>
-                <ul class="menu_item">
+                <!-- <ul class="menu_item">
                     <div class="menu_title flex">
                         <span class="title">Arsip</span>
                         <span class="line"></span>
                     </div>
                     <li class="item">
-                        <a href="#" class="link flex"><i class="bx bx-folder-open"></i><span>Arsip Surat Masuk</span></a>
+                        <a href="arsip_sm.html" class="link flex"><i class="bx bx-folder-open"></i><span>Arsip Surat Masuk</span></a>
                     </li>
                     <li class="item">
-                        <a href="#" class="link flex"><i class="bx bx-file"></i><span>Arsip Surat Keluar</span></a>
+                        <a href="arsip_sk.html" class="link flex"><i class="bx bx-file"></i><span>Arsip Surat Keluar</span></a>
                     </li>
-                </ul>
+                </ul> -->
                 <ul class="menu_item">
-                    <div class="menu_title flex">
+                    <!-- <div class="menu_title flex">
                         <span class="title">Laporan</span>
                         <span class="line"></span>
-                    </div>
+                    </div> -->
                     <li class="item">
-                        <a href="#" class="link flex"><i class="bx bx-clipboard"></i><span>Laporan</span></a>
+                        <a href="laporan.php" class="link flex"><i class="bx bx-clipboard"></i><span>Laporan</span></a>
                     </li>
                 </ul>
                 <ul class="menu_item">
-                    <div class="menu_title flex">
+                    <!-- <div class="menu_title flex">
                         <span class="title">Setting</span>
                         <span class="line"></span>
-                    </div>
+                    </div> -->
                     <li class="item">
-                        <a href="#" class="link flex"><i class="bx bx-cloud"></i><span>Backup & Restore</span></a>
+                        <a href="backup_menu.php" class="link flex"><i class="bx bx-cloud"></i><span>Backup & Restore</span></a>
                     </li>
                     <li class="item">
                         <a href="#" class="link flex"><i class="bx bx-cog"></i><span>Setting</span></a>
                     </li>
                     <li class="item">
-                        <a href="/projectdesa/logout.php" class="link flex"><i class="bx bx-log-out"></i><span>Log Out</span></a>
+                        <a href="logout.php" class="link flex"><i class="bx bx-log-out"></i><span>Log Out</span></a>
                     </li>
                 </ul>
             </div>
-            <div class="sidebar_profile flex">
+            <!-- <div class="sidebar_profile flex">
                 <span class="nav_image"><img src="/projectdesa/img/logo_example.jpeg" alt="logo_img" /></span>
                 <div class="data_text">
                     <span class="name">knight Kanterburry</span>
                     <span class="email">knight@gmail.com</span>
                 </div>
-            </div>
+            </div> -->
         </div>
     </nav>
+    <!-- Sidebar code remains the same -->
 
     <nav class="navbar flex">
-        <i class="bx bx-menu" id="hamburger-icon" title="Menu"></i>
+
+        <div class="logo_items flex">
+            <span class="nav_image"><img src="img/logo_sinapen.png" alt="logo_img" /></span>
+            <span class="logo_name">SINAPEN</span>
+        </div>
         <input type="text" name="search_box" placeholder="Search..." class="search_box" />
-        <span class="nav_image"><img src="/projectdesa/img/logo_example.jpeg" alt="logo_img" /></span>
+        <div class="user-info">
+            <div class="data_text">
+                <span class="name"><?php echo htmlspecialchars($display_username); ?></span>
+                <span class="email"><?php echo htmlspecialchars($display_email); ?></span>
+            </div>
+            <span class="nav_image">
+                <img src="/projectdesa/img/logo_example.jpeg" alt="logo_img" />
+            </span>
+        </div>
     </nav>
-
-    <div class="card-container">
-        <div class="card blue">
-            <h2>27</h2>
-            <p>Surat Masuk</p>
-            <a href="#">Lihat Selengkapnya</a>
+    <div class="main">
+        <div class="cardBox">
+            <div class="card_pending" onclick="filterPengajuan('Pending')">
+                <div>
+                    <div class="number"><?php echo $total_pending; ?></div>
+                    <div class="cardName">Permohonan Pending</div>
+                </div>
+                <div class="iconBox">
+                    <ion-icon name="documents-outline"></ion-icon>
+                </div>
+            </div>
+            <div class="card_disetujui" onclick="filterPengajuan('Approved')">
+                <div>
+                    <div class=" number"><?php echo $total_approved; ?></div>
+                    <div class="cardName">Permohonan Disetujui</div>
+                </div>
+                <div class="iconBox">
+                    <ion-icon name="documents-outline"></ion-icon>
+                </div>
+            </div>
+            <div class="card_ditolak" onclick="filterPengajuan('Rejected')">
+                <div>
+                    <div class="number"><?php echo $total_rejected; ?></div>
+                    <div class="cardName">Permohonan Ditolak</div>
+                </div>
+                <div class="iconBox">
+                    <ion-icon name="documents-outline"></ion-icon>
+                </div>
+            </div>
         </div>
-        <div class="card yellow">
-            <h2>27</h2>
-            <p>Surat Keluar</p>
-            <a href="#">Lihat Selengkapnya</a>
+
+
+        <div class="details">
+            <div class="recentOrders">
+                <div class="cardHeader">
+                    <h2>Data Permohonan (<?php echo $status_filter; ?>)</h2>
+                    <a href="#" class="btn">View All</a>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Nama Penduduk</td>
+                            <td>Tanggal Pengajuan</td>
+                            <td>Tipe Formulir</td>
+                            <td>Status</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = $filtered_pengajuan->fetch_assoc()) : ?>
+                            <tr>
+                                <td><?php echo $row['nama_penduduk']; ?></td>
+                                <td><?php echo $row['tanggal_pengajuan']; ?></td>
+                                <td><?php echo $row['tipe_formulir']; ?></td>
+                                <td><?php echo $row['status_pengajuan']; ?></td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nama</th>
-                    <th>Tanggal</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Surat A</td>
-                    <td>01-01-2024</td>
-                    <td>Diterima</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Surat B</td>
-                    <td>02-01-2024</td>
-                    <td>Dikirim</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Surat C</td>
-                    <td>03-01-2024</td>
-                    <td>Dalam Proses</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- navigasi -->
-
-    <?php if ( $halamanAktif > 1 ) : ?>
-    <a href="?halaman=<?= $halamanAktif -1; ?>">&laquo;</a>
-    <?php endif; ?>
-
-    <?php for (  $i = 1; $i <= $jumlahHalaman; $i++) : ?>
-        <?php if ( $i == $halamanAktif ) : ?>
-            <a href="?halaman=<?= $i; ?>" style="font-weight: bold; color: red;"><?= $i ?> </a>
-        <?php else : ?>
-            <a href="?halaman=<?= $i; ?>"><?= $i ?> </a>
-        <?php endif; ?>    
-    <?php endfor; ?>
-
-    <?php if ( $halamanAktif < $jumlahHalaman ) : ?>
-    <a href="?halaman=<?= $halamanAktif +1; ?>">&raquo;</a>
-    <?php endif; ?>
 
     <script>
         const sidebar = document.querySelector(".sidebar");
@@ -440,22 +254,28 @@ if ( isset($_POST["cari"]) ){
             sidebar.classList.toggle("close");
 
             if (sidebar.classList.contains("close")) {
-                cardContainer.style.marginLeft = "75px"; 
-                document.querySelector('.navbar').style.width = "calc(100% - 75px)"; 
-                document.querySelector('.navbar').style.left = "75px"; 
-                hamburgerIcon.classList.remove("bx-menu"); 
-                hamburgerIcon.classList.add("bx-x"); 
+                cardContainer.style.marginLeft = "75px";
+                document.querySelector('.navbar').style.width = "calc(100% - 75px)";
+                document.querySelector('.navbar').style.left = "75px";
+                hamburgerIcon.classList.remove("bx-menu");
+                hamburgerIcon.classList.add("bx-menu");
             } else {
-                cardContainer.style.marginLeft = "270px"; 
-                document.querySelector('.navbar').style.width = "calc(100% - 270px)"; 
-                document.querySelector('.navbar').style.left = "270px"; 
-                hamburgerIcon.classList.remove("bx-x"); 
-                hamburgerIcon.classList.add("bx-menu"); 
+                cardContainer.style.marginLeft = "270px";
+                document.querySelector('.navbar').style.width = "calc(100% - 270px)";
+                document.querySelector('.navbar').style.left = "270px";
+                hamburgerIcon.classList.remove("bx-menu");
+                hamburgerIcon.classList.add("bx-menu");
             }
         };
 
-        // Event listener untuk ikon hamburger
+        // Event listener for hamburger icon
         hamburgerIcon.addEventListener("click", toggleSidebar);
+
+
+        // Fungsi untuk mengubah filter pengajuan berdasarkan status
+        function filterPengajuan(status) {
+            window.location.href = `user_dashboard.php?status=${status}`;
+        }
     </script>
 </body>
 

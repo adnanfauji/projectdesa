@@ -6,25 +6,48 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
+
+:root {
+    --blue: #45b5ff;
+    --white: #fff;
+    --red: #ff1414;
+    --black1: #222;
+    --black2: #999;
+    --black3: #2e2b24;
+    --azure: #F0FFFF;
+    --fuchsia: #FF00FF;
+    --green: #00fb11ca;
+    --red: #f70015e4;
+    --orange: #e9b10a;
+}
+
 body {
     min-height: 100vh;
     background: #eef5fe;
 }
+
 .flex {
     display: flex;
     align-items: center;
 }
+
 .nav_image {
     display: flex;
     min-width: 55px;
     justify-content: center;
 }
+
 .nav_image img {
     height: 35px;
     width: 35px;
     border-radius: 50%;
     object-fit: cover;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
 }
+
 .sidebar {
     position: fixed;
     top: 0;
@@ -34,26 +57,51 @@ body {
     background: #ffffff;
     padding: 15px 10px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-    transition: width 0.3s ease-in-out; /* Perhalus transisi sidebar */
+    transition: width 0.3s ease-in-out;
+    /* Perhalus transisi sidebar */
 }
+
 .sidebar.close {
     width: calc(55px + 20px);
 }
+
 .logo_items {
-    gap: 8px;
+    gap: 4px;
 }
+
 .logo_name {
     font-size: 22px;
     color: #333;
     font-weight: 500;
     transition: all 0.3s ease;
 }
+
 .sidebar.close .logo_name,
 .sidebar.close #hamburger-icon,
 .sidebar.close #sidebar-close {
-    opacity: 0;
-    pointer-events: none;
+    cursor: pointer;
+    color: #333;
+    /* Ensure it's visible */
 }
+
+#hamburger-icon {
+    font-size: 40px;
+    /* Perbesar ukuran hamburger */
+    padding: 0px;
+    /* Sesuaikan padding agar lebih besar */
+    margin-top: 0px;
+    /* Geser hamburger sedikit ke atas */
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 20;
+    /* Pastikan hamburger berada di atas elemen lain jika diperlukan */
+}
+
+.sidebar.close #hamburger-icon {
+    background: transparent;
+}
+
 #hamburger-icon,
 #sidebar-close {
     padding: 10px;
@@ -68,25 +116,34 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 0px;
     overflow-y: auto;
     height: calc(100% - 82px);
 }
+
+.menu_item bx {
+    margin-left: 5px;
+}
+
 .menu_container::-webkit-scrollbar {
     display: none;
 }
+
 .menu_title {
     position: relative;
     height: 50px;
     width: 55px;
 }
+
 .menu_title .title {
     margin-left: 15px;
     transition: all 0.3s ease;
 }
+
 .sidebar.close .title {
     opacity: 0;
 }
+
 .menu_title .line {
     position: absolute;
     left: 50%;
@@ -97,28 +154,35 @@ body {
     background: #aaa;
     transition: all 0.3s ease;
 }
+
 .menu_title .line {
     opacity: 0;
 }
+
 .sidebar.close .line {
     opacity: 1;
 }
+
 .item {
     list-style: none;
 }
+
 .link {
     text-decoration: none;
     border-radius: 8px;
     margin-bottom: 8px;
     color: #707070;
 }
+
 .link:hover {
     color: #fff;
     background-color: #4070f4;
 }
+
 .link span {
     white-space: nowrap;
 }
+
 .link i {
     height: 50px;
     min-width: 55px;
@@ -134,18 +198,81 @@ body {
     align-items: center;
     padding-top: 15px;
     margin-top: 15px;
-    gap: 10px; 
+    gap: 10px;
     border-top: 2px solid rgba(0, 0, 0, 0.1);
 }
+
 .sidebar_profile .data_text .email {
-    font-size: 12px; /* Ubah ukuran font sesuai kebutuhan */
-    color: #707070; /* Sesuaikan warna jika perlu */
+    font-size: 12px;
+    /* Ubah ukuran font sesuai kebutuhan */
+    color: #707070;
+    /* Sesuaikan warna jika perlu */
 }
 
 
 .data_text {
     display: flex;
     flex-direction: column;
+}
+
+/* .navbar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px 20px;
+    background-color: #fff; 
+} */
+
+/* Menambahkan style pada logo_items */
+.logo_items {
+    display: flex;
+    align-items: center;
+    /* Menjaga logo dan teks sejajar secara vertikal */
+}
+
+.logo_items .nav_image {
+    margin-right: 5px;
+    /* Memberi jarak antara logo dan nama */
+}
+
+.search_box {
+    flex-grow: 1;
+    /*Memberiruangkosongdiantaraelemenpencarian*/
+    padding: 8px;
+    margin: 0 20px;
+    /*Memberikanjarakdenganelemenlainnya*/
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info .nav_image {
+    margin-right: 10px;
+    /* Memberi jarak antara gambar dan teks */
+}
+
+.user-info .data_text {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    /* Menyusun teks username dan email secara vertikal */
+}
+
+.user-info .data_text .name {
+    font-weight: bold;
+}
+
+.user-info .data_text .email {
+    font-size: 0.9em;
+    color: #333;
 }
 
 .navbar {
@@ -155,12 +282,16 @@ body {
     position: fixed;
     top: 0;
     left: 270px;
-    background: #4070f4;
-    padding: 10px 20px;
+    background: #45b5ff;
+    padding: 10px 5px;
+    /* Tambahkan padding agar lebih lebar untuk menyesuaikan dengan hamburger */
     justify-content: space-between;
-    transition: left 0.3s ease-in-out, width 0.3s ease-in-out; /* Perhalus transisi */
+    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+    align-items: center;
+    /* Menjaga semua elemen navbar sejajar secara vertikal */
 }
-.search_box {
+
+/* .search_box {
     height: 46px;
     max-width: 500px;
     width: 100%;
@@ -170,7 +301,8 @@ body {
     padding: 0 15px;
     font-size: 18px;
     color: #333;
-}
+} */
+
 .navbar img {
     height: 40px;
     width: 40px;
@@ -180,60 +312,249 @@ body {
 .card-container {
     display: flex;
     gap: 20px;
-    transition: margin-left 0.3s ease-in-out; /* Perhalus transisi */
-    margin-top: 90px; 
-    margin-left: 270px; 
+    transition: margin-left 0.3s ease-in-out;
+    /* Perhalus transisi */
+    margin-top: 90px;
+    margin-left: 270px;
 }
 
-.card {
-    background: #fff;
+.main {
+    position: absolute;
+    width: calc(100% - 330px);
+    left: 300px;
+    min-height: 100vh;
+    font-size: 1rem;
+    margin-top: 65px;
+    /* background: var(--azure); */
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+/* ============================================= Card Box ============================================== */
+.cardBox {
+    position: relative;
+    width: 100%;
+    padding: 15px 0px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+}
+
+.cardBox .card_pending,
+.cardBox .card_disetujui,
+.cardBox .card_ditolak {
+    position: relative;
+    background: var(--white);
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.cardBox .card_pending .number,
+.cardBox .card_disetujui .number,
+.cardBox .card_ditolak .number {
+    position: relative;
+    font-weight: bold;
+    font-size: 2.5rem;
+    color: var(--black1);
+}
+
+.cardBox .card_pending .cardName,
+.cardBox .card_disetujui .cardName,
+.cardBox .card_ditolak .cardName {
+    color: var(--black1);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.cardBox .card_pending .iconBox,
+.cardBox .card_disetujui .iconBox,
+.cardBox .card_ditolak .iconBox {
+    font-size: 3.5rem;
+    font-weight: 500;
+    color: var(--black1);
+}
+
+.cardBox .card_pending:hover {
+    background: var(--orange);
+}
+
+.cardBox .card_disetujui:hover {
+    background: var(--green);
+}
+
+.cardBox .card_ditolak:hover {
+    background: var(--red);
+}
+
+.cardBox .card:hover .number,
+.cardBox .card:hover .cardName,
+.cardBox .card:hover .iconBox {
+    color: var(--white);
+}
+
+
+details {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    /* grid-template-columns: 1fr; */
+    grid-gap: 10px;
+    margin-top: 10px;
+}
+
+.details .recentOrders {
+    /* position: relative; */
+    grid-column: span 2;
+    display: block;
+    width: 100%;
+    /* min-height: 300px; */
+    background: var(--white);
     padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    flex: 1;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.details .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cardHeader h2 {
+    font-weight: 600;
+    color: var(--blue);
+}
+
+.cardHeader .btn {
+    position: relative;
+    padding: 5px 10px;
+    background: var(--blue);
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+
+.details table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5px;
+}
+
+.details table thead td {
+    font-weight: 600;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+}
+
+.details .recentOrders table tr {
+    color: var(--black1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.details .recentOrders table tr:nth-child {
+    border-bottom: none;
+}
+
+.details .recentOrders table tbody tr:hover {
+    background: var(--blue);
+    color: var(--white);
+}
+
+.details .recentOrders table tr td {
+    padding: 10px;
+}
+
+.details .recentOrders table tr td:nth-child {
     text-align: center;
 }
 
-.card h2 {
-    font-size: 40px;
-    margin-bottom: 10px;
-}
-.card p {
-    font-size: 18px;
+.details .recentOrders table tr td:nth-child(2) {
+    text-align: center;
 }
 
-.card a {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 15px; 
-    border-radius: 5px; 
-    transition: color 0.3s ease, transform 0.3s ease; 
+.details .recentOrders table tr td:nth-child(3) {
+    text-align: center;
 }
 
-.card a:hover {
-    color: #0056b3; 
-    transform: translateY(-2px); 
+.details .recentOrders table tr td:nth-child(4) {
+    text-align: center;
 }
 
-.card.blue {
-    background-color: #2196F3;
-    color: white;
+.status.delivered {
+    padding: 2px 4px;
+    background: #8de02c;
+    color: var(--white);
+    border-radius: 4px;
+    /* font-size: 14px; */
+    font-weight: 500;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
 }
 
-.card.yellow {
-    background-color: #FFC107;
-    color: white;
+.status.pending {
+    padding: 2px 4px;
+    background: #e9b10a;
+    color: var(--white);
+    border-radius: 4px;
+    /* font-size: 14px; */
+    font-weight: 500;
+}
+
+.status.return {
+    padding: 2px 4px;
+    background: #f00;
+    color: var(--white);
+    border-radius: 4px;
+    /* font-size: 14px; */
+    font-weight: 500;
+}
+
+.status.inprogress {
+    padding: 2px 4px;
+    background: #1795ce;
+    color: var(--white);
+    border-radius: 4px;
+    /* font-size: 14px; */
+    font-weight: 500;
 }
 
 .table-container {
     margin-top: 20px;
-    overflow-x: auto; 
-    transition: margin-left 0.3s ease-in-out; 
-    margin-left: 270px; 
+    overflow-x: auto;
+    transition: margin-left 0.3s ease-in-out;
+    margin-left: 270px;
+    -webkit-transition: margin-left 0.3s ease-in-out;
+    -moz-transition: margin-left 0.3s ease-in-out;
+    -ms-transition: margin-left 0.3s ease-in-out;
+    -o-transition: margin-left 0.3s ease-in-out;
+    -webkit-transition: margin-left 0.3s ease-in-out;
 }
-.sidebar.close ~ .table-container, 
-.sidebar.close ~ .card-container {
-    margin-left: 75px; 
+
+.sidebar.close~.table-container,
+.sidebar.close~.card-container {
+    margin-left: 75px;
 }
 
 table {
@@ -242,7 +563,8 @@ table {
     margin-top: 20px;
 }
 
-th, td {
+th,
+td {
     padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -256,19 +578,23 @@ tr:hover {
     background-color: #f1f1f1;
 }
 
+
 @media screen and (max-width: 1100px) {
     .navbar {
         left: 65%;
     }
 }
+
 @media screen and (max-width: 800px) {
     .sidebar {
         left: 0;
         z-index: 1000;
     }
+
     .sidebar.close {
         left: -100%;
     }
+
     .navbar {
         left: 0;
         max-width: 100%;
@@ -276,8 +602,8 @@ tr:hover {
     }
 }
 
- /* CSS tambahan untuk efek hover */
- .clickable-header {
+/* CSS tambahan untuk efek hover */
+.clickable-header {
     text-decoration: none;
     color: inherit;
     transition: color 0.3s ease;
@@ -304,18 +630,24 @@ tr:hover {
 
 .input-with-icon {
     position: relative;
-    display: flex; /* Menggunakan flex untuk tata letak */
-    align-items: center; /* Rata tengah secara vertikal */
+    display: flex;
+    /* Menggunakan flex untuk tata letak */
+    align-items: center;
+    /* Rata tengah secara vertikal */
 }
 
 .input-with-icon .search-icon {
     position: absolute;
-    right: 10px; /* Jarak dari kanan */
-    top: 50%; /* Posisikan vertikal di tengah */
-    transform: translateY(-50%); /* Pusatkan secara vertikal */
+    right: 10px;
+    /* Jarak dari kanan */
+    top: 50%;
+    /* Posisikan vertikal di tengah */
+    transform: translateY(-50%);
+    /* Pusatkan secara vertikal */
     color: #aaa;
 }
 
 .input-with-icon input {
-    padding-right: 30px; /* Tambah padding untuk ruang ikon */
+    padding-right: 30px;
+    /* Tambah padding untuk ruang ikon */
 }

@@ -60,11 +60,15 @@ body {
 }
 
 .wrapper .left p {
-  font-size: 1rem; /* Ukuran teks yang sesuai */
+  font-size: 1rem;
+  /* Ukuran teks yang sesuai */
   color: #6a6565;
-  margin: 10px 0; /* Jarak antar elemen */
-  line-height: 1.5; /* Line height agar lebih mudah dibaca */
-  max-width: 250px; /* Membatasi lebar teks */
+  margin: 10px 0;
+  /* Jarak antar elemen */
+  line-height: 1.5;
+  /* Line height agar lebih mudah dibaca */
+  max-width: 250px;
+  /* Membatasi lebar teks */
 }
 
 /* Registration Wrapper */
@@ -96,7 +100,7 @@ h1 {
 .input-field {
   position: relative;
   border-bottom: 2px solid #ccc;
-  margin: 10px 0;
+  margin: 15px 0;
 }
 
 .input-field input {
@@ -124,7 +128,7 @@ h1 {
 /* Input Focus and Validation */
 .input-field input:focus~label,
 .input-field input:valid~label {
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   top: 10px;
   transform: translateY(-120%);
 }
@@ -148,7 +152,8 @@ h1 {
 }
 
 /* Alert Messages */
-.alert, .success {
+.alert,
+.success {
   display: flex;
   align-items: center;
   padding: 10px;
@@ -161,7 +166,8 @@ h1 {
   background: #6a6565;
 }
 
-.alert .error, .alert .text {
+.alert .error,
+.alert .text {
   color: #D93025;
 }
 
@@ -169,7 +175,8 @@ h1 {
   background: #6a6565;
 }
 
-.success .success-icon, .success .text {
+.success .success-icon,
+.success .text {
   color: #28a745;
 }
 
@@ -183,7 +190,8 @@ h1 {
   color: #6a6565;
 }
 
-.forget a, .register a {
+.forget a,
+.register a {
   font-size: 12px;
   color: #6a6565;
   text-decoration: none;
@@ -191,11 +199,10 @@ h1 {
 }
 
 /* Hover Effect for Links */
-.forget a:hover, .register a:hover {
-  color: #fff;
-  background: linear-gradient(45deg, #64b5f6, #1e88e5);
-  /* -webkit-background-clip: text; */
-  -webkit-text-fill-color: transparent;
+.forget a:hover,
+.register a:hover,
+.forget label p:hover {
+  color: #1e88e5;
   text-decoration: underline;
 }
 
@@ -204,20 +211,34 @@ h1 {
   accent-color: #6a6565;
 }
 
+.remember {
+  display: flex;
+  align-items: center;
+  /* Menyelaraskan teks dengan checkbox */
+}
+
+label.remember p {
+  margin: 0;
+}
+
 .forget label {
   display: flex;
   align-items: center;
   cursor: pointer;
+  margin: 0;
 }
 
 .forget label p {
-  margin-left: 5px;
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  font-size: 12px;
 }
 
 /* Button Styling */
 button {
   max-width: 300px;
-  background: linear-gradient(45deg, #b4d0e7, #64b5f6);
+  background: #64b5f6;
   color: #6a6565;
   font-weight: bold;
   padding: 10px;
@@ -227,12 +248,21 @@ button {
   cursor: pointer;
   box-shadow: 0 0 50px rgba(44, 43, 43, 0.2);
   transition: 0.3s ease;
+  -webkit-transition: 0.3s ease;
+  -moz-transition: 0.3s ease;
+  -ms-transition: 0.3s ease;
+  -o-transition: 0.3s ease;
 }
 
 button:hover {
-  background: linear-gradient(45deg, #b4d0e7, #1e88e5);
+  background: #1e88e5;
   color: #fff;
   box-shadow: 0 0 50px rgba(44, 43, 43, 0.2);
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
 }
 
 /* Registration Section */
