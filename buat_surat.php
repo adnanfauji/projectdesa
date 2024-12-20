@@ -160,37 +160,37 @@ if ($result_user->num_rows > 0) {
         <div class="card-container">
             <div class="card">
                 <p>Surat Pengantar KTP</p>
-                <a href="form.html" class="card-button">Buat Permohonan Surat</a>
+                <a href="form.php" class="card-button">Buat Permohonan Surat</a>
                 <!-- <button class="card-button">Buat Permohonan Surat</button> -->
             </div>
             <div class="card">
                 <p>Surat Pengantar KK</p>
-                <a href="form.html" class="card-button">Buat Permohonan Surat</a>
+                <a href="form.php" class="card-button">Buat Permohonan Surat</a>
                 <!-- <button class="card-button">Buat Permohonan Surat</button> -->
             </div>
             <div class="card">
                 <p>Surat Pengantar Keterangan Usaha</p>
-                <a href="form.html" class="card-button">Buat Permohonan Surat</a>
+                <a href="form.php" class="card-button">Buat Permohonan Surat</a>
                 <!-- <button class="card-button">Buat Permohonan Surat</button> -->
             </div>
             <div class="card">
                 <p>Surat Keterangan Pengantar Nikah</p>
-                <a href="form.html" class="card-button">Buat Permohonan Surat</a>
+                <a href="form.php" class="card-button">Buat Permohonan Surat</a>
                 <!-- <button class="card-button">Buat Permohonan Surat</button> -->
             </div>
             <div class="card">
                 <p>Surat Keterangan Pindah/Datang</p>
-                <a href="form.html" class="card-button">Buat Permohonan Surat</a>
+                <a href="form.php" class="card-button">Buat Permohonan Surat</a>
                 <!-- <button class="card-button">Buat Permohonan Surat</button> -->
             </div>
             <div class="card">
                 <p>Surat Keterangan kematian</p>
-                <a href="form.html" class="card-button">Buat Permohonan Surat</a>
+                <a href="form.php" class="card-button">Buat Permohonan Surat</a>
                 <!-- <button class="card-button">Buat Permohonan Surat</button> -->
             </div>
             <div class="card">
                 <p>Surat Keterangan Ahli Waris</p>
-                <a href="form.html" class="card-button">Buat Permohonan Surat</a>
+                <a href="form.php" class="card-button">Buat Permohonan Surat</a>
                 <!-- <button class="card-button">Buat Permohonan Surat</button> -->
             </div>
         </div>
@@ -201,33 +201,30 @@ if ($result_user->num_rows > 0) {
     <script>
         const sidebar = document.querySelector(".sidebar");
         const hamburgerIcon = document.querySelector("#hamburger-icon");
-        const cardContainer = document.querySelector(".card-container");
-
-        document.getElementById('hamburger-icon').addEventListener('click', function() {
-            sidebar.classList.toggle('close'); // Toggle the close class on sidebar
-            toggleSidebar(); // Call the toggle function
-        });
+        const cardContainer = document.querySelector(".container");
 
         const toggleSidebar = () => {
+            sidebar.classList.toggle("close");
+
             if (sidebar.classList.contains("close")) {
-                // Sidebar is closed, move the card-container and navbar accordingly
-                cardContainer.style.marginLeft = "75px"; // Adjust this value as needed
+                cardContainer.style.marginLeft = "75px";
                 document.querySelector('.navbar').style.width = "calc(100% - 75px)";
                 document.querySelector('.navbar').style.left = "75px";
                 hamburgerIcon.classList.remove("bx-menu");
-                hamburgerIcon.classList.add("bx-menu"); // Change the hamburger icon to "close"
+                hamburgerIcon.classList.add("bx-x");
             } else {
-                // Sidebar is open, reset the card-container and navbar
-                cardContainer.style.marginLeft = "270px"; // Adjust this value based on the sidebar width
+                cardContainer.style.marginLeft = "270px";
                 document.querySelector('.navbar').style.width = "calc(100% - 270px)";
                 document.querySelector('.navbar').style.left = "270px";
-                hamburgerIcon.classList.remove("bx-menu");
-                hamburgerIcon.classList.add("bx-menu"); // Change the icon back to hamburger
+                hamburgerIcon.classList.remove("bx-x");
+                hamburgerIcon.classList.add("bx-menu");
             }
         };
 
         // Event listener for hamburger icon
-        hamburgerIcon.addEventListener("click", toggleSidebar);
+        hamburgerIcon.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+        });
 
 
         // Logika untuk menyembunyikan ikon pencarian

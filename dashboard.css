@@ -57,12 +57,15 @@ body {
     background: #ffffff;
     padding: 15px 10px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-    transition: width 0.3s ease-in-out;
-    /* Perhalus transisi sidebar */
+    transition: width 0.1s ease-in-out;
+    -webkit-transition: width 0.1s ease-in-out;
+    -moz-transition: width 0.1s ease-in-out;
+    -ms-transition: width 0.1s ease-in-out;
+    -o-transition: width 0.1s ease-in-out;
 }
 
 .sidebar.close {
-    width: calc(55px + 20px);
+    width: 75px;
 }
 
 .logo_items {
@@ -73,7 +76,6 @@ body {
     font-size: 22px;
     color: #333;
     font-weight: 500;
-    transition: all 0.3s ease;
 }
 
 .sidebar.close .logo_name,
@@ -276,19 +278,16 @@ body {
 }
 
 .navbar {
+    display: flex;
     z-index: 10;
     max-width: 100%;
     width: calc(100% - 270px);
     position: fixed;
+    margin-left: 270px;
     top: 0;
-    left: 270px;
     background: #45b5ff;
     padding: 10px 5px;
-    /* Tambahkan padding agar lebih lebar untuk menyesuaikan dengan hamburger */
-    justify-content: space-between;
-    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
     align-items: center;
-    /* Menjaga semua elemen navbar sejajar secara vertikal */
 }
 
 /* .search_box {
@@ -312,25 +311,29 @@ body {
 .card-container {
     display: flex;
     gap: 20px;
-    transition: margin-left 0.3s ease-in-out;
-    /* Perhalus transisi */
+    transition: margin-left 0.2s ease-in-out;
+    /*Perhalustransisi*/
     margin-top: 90px;
     margin-left: 270px;
+    -webkit-transition: margin-left 0.2s ease-in-out;
+    -moz-transition: margin-left 0.2s ease-in-out;
+    -ms-transition: margin-left 0.2s ease-in-out;
+    -o-transition: margin-left 0.2s ease-in-out;
 }
 
+/* .main.close {
+    width: calc(100% - 270px);
+    left: 75px;
+} */
+
 .main {
-    position: absolute;
-    width: calc(100% - 330px);
-    left: 300px;
+    position: relative;
+    width: calc(100% - 270px);
+    margin-left: 270px;
+    padding: 20px;
     min-height: 100vh;
     font-size: 1rem;
     margin-top: 65px;
-    /* background: var(--azure); */
-    transition: 0.5s;
-    -webkit-transition: 0.5s;
-    -moz-transition: 0.5s;
-    -ms-transition: 0.5s;
-    -o-transition: 0.5s;
 }
 
 /* ============================================= Card Box ============================================== */
@@ -552,8 +555,9 @@ details {
     -webkit-transition: margin-left 0.3s ease-in-out;
 }
 
-.sidebar.close~.table-container,
-.sidebar.close~.card-container {
+.sidebar.close~.navbar,
+.sidebar.close~.main {
+    width: calc(100% - 75px);
     margin-left: 75px;
 }
 

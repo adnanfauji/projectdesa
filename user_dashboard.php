@@ -250,7 +250,7 @@ $filtered_pengajuan = getPengajuanByStatus($connect, $status_filter);
     <script>
         const sidebar = document.querySelector(".sidebar");
         const hamburgerIcon = document.querySelector("#hamburger-icon");
-        const cardContainer = document.querySelector(".card-container");
+        const cardContainer = document.querySelector(".main");
 
         const toggleSidebar = () => {
             sidebar.classList.toggle("close");
@@ -260,18 +260,20 @@ $filtered_pengajuan = getPengajuanByStatus($connect, $status_filter);
                 document.querySelector('.navbar').style.width = "calc(100% - 75px)";
                 document.querySelector('.navbar').style.left = "75px";
                 hamburgerIcon.classList.remove("bx-menu");
-                hamburgerIcon.classList.add("bx-menu");
+                hamburgerIcon.classList.add("bx-x");
             } else {
                 cardContainer.style.marginLeft = "270px";
                 document.querySelector('.navbar').style.width = "calc(100% - 270px)";
                 document.querySelector('.navbar').style.left = "270px";
-                hamburgerIcon.classList.remove("bx-menu");
+                hamburgerIcon.classList.remove("bx-x");
                 hamburgerIcon.classList.add("bx-menu");
             }
         };
 
         // Event listener for hamburger icon
-        hamburgerIcon.addEventListener("click", toggleSidebar);
+        hamburgerIcon.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+        });
 
 
         // Fungsi untuk mengubah filter pengajuan berdasarkan status

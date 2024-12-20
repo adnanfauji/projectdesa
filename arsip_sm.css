@@ -182,9 +182,7 @@ body {
 
 .sidebar_profile .data_text .email {
     font-size: 12px;
-    /* Ubah ukuran font sesuai kebutuhan */
     color: #707070;
-    /* Sesuaikan warna jika perlu */
 }
 
 
@@ -197,20 +195,16 @@ body {
 .logo_items {
     display: flex;
     align-items: center;
-    /* Menjaga logo dan teks sejajar secara vertikal */
 }
 
 .logo_items .nav_image {
     margin-right: 5px;
-    /* Memberi jarak antara logo dan nama */
 }
 
 .search_box {
     flex-grow: 1;
-    /*Memberiruangkosongdiantaraelemenpencarian*/
     padding: 8px;
     margin: 0 20px;
-    /*Memberikanjarakdenganelemenlainnya*/
     border: 1px solid #ccc;
     border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -226,7 +220,6 @@ body {
 
 .user-info .nav_image {
     margin-right: 10px;
-    /* Memberi jarak antara gambar dan teks */
 }
 
 .user-info .data_text {
@@ -246,19 +239,16 @@ body {
 }
 
 .navbar {
+    display: flex;
     z-index: 10;
     max-width: 100%;
     width: calc(100% - 270px);
     position: fixed;
     top: 0;
-    left: 270px;
+    margin-left: 270px;
     background: #45b5ff;
     padding: 10px 5px;
-    /* Tambahkan padding agar lebih lebar untuk menyesuaikan dengan hamburger */
-    justify-content: space-between;
-    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
     align-items: center;
-    /* Menjaga semua elemen navbar sejajar secara vertikal */
 }
 
 /* .search_box {
@@ -273,6 +263,12 @@ body {
     color: #333;
 } */
 
+.sidebar.close~.navbar,
+.sidebar.close~.main {
+    width: calc(100% - 75px);
+    margin-left: 75px;
+}
+
 .navbar img {
     height: 40px;
     width: 40px;
@@ -280,23 +276,20 @@ body {
 }
 
 .content {
-    margin-left: 190px;
-    /* Jarak dari sidebar */
-    padding: 20px;
-    /* Ruang pada konten */
-    margin-top: 70px;
-    /* Menyesuaikan tinggi navbar */
-    transition: margin-left 0.3s ease-in-out;
-    /* Untuk transisi yang halus */
+    position: relative;
+    margin-top: 80px;
+    width: calc(100% - 270px);
+    margin-left: 270px;
 }
 
 .container {
-    width: 90%;
+    width: auto;
     margin: 20px auto;
-    background: #fff;
+    background: #ffffff;
     border-radius: 8px;
-    overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    height: auto;
 }
 
 .table-header {
@@ -326,7 +319,7 @@ body {
 }
 
 table {
-    width: 100%;
+    width: auto;
     border-collapse: collapse;
 }
 

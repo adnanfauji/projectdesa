@@ -40,12 +40,15 @@ body {
     background: #ffffff;
     padding: 15px 10px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-    transition: width 0.3s ease-in-out;
-    /* Perhalus transisi sidebar */
+    transition: width 0.1s ease-in-out;
+    -webkit-transition: width 0.1s ease-in-out;
+    -moz-transition: width 0.1s ease-in-out;
+    -ms-transition: width 0.1s ease-in-out;
+    -o-transition: width 0.1s ease-in-out;
 }
 
 .sidebar.close {
-    width: calc(55px + 20px);
+    width: 75px;
 }
 
 .logo_items {
@@ -131,7 +134,15 @@ body {
     width: 20px;
     border-radius: 25px;
     background: #aaa;
-    transition: all 0.3s ease;
+    transition: all 0.1s ease;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    -webkit-transition: all 0.1s ease;
+    -moz-transition: all 0.1s ease;
+    -ms-transition: all 0.1s ease;
+    -o-transition: all 0.1s ease;
 }
 
 .menu_title .line {
@@ -188,6 +199,14 @@ body {
     /* Sesuaikan warna jika perlu */
 }
 
+.main {
+    position: relative;
+    width: calc(100% - 270px);
+    margin-left: 270px;
+    min-height: 100vh;
+    font-size: 1rem;
+    margin-top: 65px;
+}
 
 .data_text {
     display: flex;
@@ -248,19 +267,23 @@ body {
 }
 
 .navbar {
+    display: flex;
     z-index: 10;
     max-width: 100%;
     width: calc(100% - 270px);
     position: fixed;
     top: 0;
-    left: 270px;
+    margin-left: 270px;
     background: #45b5ff;
     padding: 10px 5px;
-    /* Tambahkan padding agar lebih lebar untuk menyesuaikan dengan hamburger */
-    justify-content: space-between;
-    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
     align-items: center;
-    /* Menjaga semua elemen navbar sejajar secara vertikal */
+}
+
+.sidebar.close~.content,
+.sidebar.close~.navbar,
+.sidebar.close~.container {
+    width: calc(100% - 75px);
+    margin-left: 75px;
 }
 
 /* .search_box {
@@ -273,6 +296,10 @@ body {
     padding: 0 15px;
     font-size: 18px;
     color: #333;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
 } */
 
 .navbar img {
@@ -290,23 +317,22 @@ body {
 
 
 .content {
-    margin-left: 150px;
-    /* Jarak dari sidebar */
+    margin-left: 270px;
     padding: 20px;
-    /* Ruang pada konten */
     margin-top: 50px;
-    /* Menyesuaikan tinggi navbar */
-    transition: margin-left 0.3s ease-in-out;
-    /* Untuk transisi yang halus */
 }
 
 .container {
-    width: 85%;
-    margin: 20px auto;
+    max-width: 100%;
+    margin: 10px auto;
     background: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
 }
 
 h1 {

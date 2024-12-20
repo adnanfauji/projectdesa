@@ -1,3 +1,37 @@
+<?php
+session_start();
+require 'db_connect.php';
+require 'functions.php';
+
+// Redirect jika user tidak login
+if (!isset($_SESSION["username"])) {
+    header("Location: index.php");
+    exit;
+}
+
+// Ambil username dari sesi
+$username = $_SESSION["username"];
+
+// Query untuk mendapatkan data user berdasarkan username
+$query_user = "SELECT username, email, profile_picture FROM user WHERE username = ?";
+$stmt = $connect->prepare($query_user);
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result_user = $stmt->get_result();
+
+// Periksa apakah data user ditemukan
+if ($result_user->num_rows > 0) {
+    $user_data = $result_user->fetch_assoc();
+    $display_username = $user_data['username'];
+    $display_email = $user_data['email'];
+    $display_profile_picture = $user_data['profile_picture'];
+} else {
+    $display_username = "Guest";
+    $display_email = "guest@example.com";
+    $display_email = "image";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,17 +48,18 @@
 <body>
     <!-- Sidebar -->
     <nav class="sidebar locked">
-        <div class="logo_items flex">
+        <!-- <div class="logo_items flex">
             <span class="nav_image"><img src="images/logo_example.jpeg" alt="logo_img" /></span>
             <span class="logo_name">SINAPEN</span>
-        </div>
+        </div> -->
         <div class="menu_container">
             <div class="menu_items">
                 <ul class="menu_item">
-                    <div class="menu_title flex">
+                    <i class="bx bx-menu" id="hamburger-icon" title="Menu"></i>
+                    <!-- <div class="menu_title flex">
                         <span class="title">Dashboard</span>
                         <span class="line"></span>
-                    </div>
+                    </div> -->
                     <li class="item"><a href="user_dashboard.php" class="link flex"><i
                                 class="bx bx-home-alt"></i><span>Home</span></a></li>
                     <li class="item"><a href="buat_surat.php" class="link flex"><i
@@ -80,9 +115,21 @@
 
     <!-- Navbar -->
     <nav class="navbar flex">
-        <i class="bx bx-menu" id="hamburger-icon" title="Menu"></i>
-        <input type="text" placeholder="Search..." class="search_box" />
-        <span class="nav_image"><img src="images/profil_example.jpeg" alt="logo_img" /></span>
+
+        <div class="logo_items flex">
+            <span class="nav_image"><img src="img/logo_sinapen.png" alt="logo_img" /></span>
+            <span class="logo_name">SINAPEN</span>
+        </div>
+        <input type="text" name="search_box" placeholder="Search..." class="search_box" />
+        <div class="user-info">
+            <div class="data_text">
+                <span class="name"><?php echo htmlspecialchars($display_username); ?></span>
+                <span class="email"><?php echo htmlspecialchars($display_email); ?></span>
+            </div>
+            <span class="nav_image">
+                <img src="<?php echo htmlspecialchars($display_profile_picture); ?>" alt="logo_img" />
+            </span>
+        </div>
     </nav>
 
     <!-- Main Content -->
@@ -214,12 +261,12 @@
         // Event listener untuk ikon hamburger
         hamburgerIcon.addEventListener("click", toggleSidebar);
         // Script to synchronize the dates
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const tanggalPengajuan = document.getElementById("tanggal_pengajuan");
             const tanggalFormulir = document.getElementById("tanggal_formulir");
 
             // Set the Tanggal Formulir to the selected Tanggal Pengajuan on change
-            tanggalPengajuan.addEventListener("change", function () {
+            tanggalPengajuan.addEventListener("change", function() {
                 const selectedDate = tanggalPengajuan.value;
                 tanggalFormulir.value = selectedDate; // Set the same date for Tanggal Formulir
             });

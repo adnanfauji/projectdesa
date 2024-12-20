@@ -6,25 +6,48 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
+
+:root {
+    --blue: #45b5ff;
+    --white: #fff;
+    --red: #ff1414;
+    --black1: #222;
+    --black2: #999;
+    --black3: #2e2b24;
+    --azure: #F0FFFF;
+    --fuchsia: #FF00FF;
+    --green: #00fb11ca;
+    --red: #f70015e4;
+    --orange: #e9b10a;
+}
+
 body {
     min-height: 100vh;
     background: #eef5fe;
 }
+
 .flex {
     display: flex;
     align-items: center;
 }
+
 .nav_image {
     display: flex;
     min-width: 55px;
     justify-content: center;
 }
+
 .nav_image img {
     height: 35px;
     width: 35px;
     border-radius: 50%;
     object-fit: cover;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
 }
+
 .sidebar {
     position: fixed;
     top: 0;
@@ -34,26 +57,54 @@ body {
     background: #ffffff;
     padding: 15px 10px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-    transition: width 0.3s ease-in-out; /* Perhalus transisi sidebar */
+    transition: width 0.1s ease-in-out;
+    -webkit-transition: width 0.1s ease-in-out;
+    -moz-transition: width 0.1s ease-in-out;
+    -ms-transition: width 0.1s ease-in-out;
+    -o-transition: width 0.1s ease-in-out;
 }
+
 .sidebar.close {
     width: calc(55px + 20px);
 }
+
 .logo_items {
-    gap: 8px;
+    gap: 4px;
 }
+
 .logo_name {
     font-size: 22px;
     color: #333;
     font-weight: 500;
     transition: all 0.3s ease;
 }
+
 .sidebar.close .logo_name,
 .sidebar.close #hamburger-icon,
 .sidebar.close #sidebar-close {
-    opacity: 0;
-    pointer-events: none;
+    cursor: pointer;
+    color: #333;
+    /* Ensure it's visible */
 }
+
+#hamburger-icon {
+    font-size: 40px;
+    /* Perbesar ukuran hamburger */
+    padding: 0px;
+    /* Sesuaikan padding agar lebih besar */
+    margin-top: 0px;
+    /* Geser hamburger sedikit ke atas */
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 20;
+    /* Pastikan hamburger berada di atas elemen lain jika diperlukan */
+}
+
+.sidebar.close #hamburger-icon {
+    background: transparent;
+}
+
 #hamburger-icon,
 #sidebar-close {
     padding: 10px;
@@ -68,25 +119,34 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 0px;
     overflow-y: auto;
     height: calc(100% - 82px);
 }
+
+.menu_item bx {
+    margin-left: 5px;
+}
+
 .menu_container::-webkit-scrollbar {
     display: none;
 }
+
 .menu_title {
     position: relative;
     height: 50px;
     width: 55px;
 }
+
 .menu_title .title {
     margin-left: 15px;
     transition: all 0.3s ease;
 }
+
 .sidebar.close .title {
     opacity: 0;
 }
+
 .menu_title .line {
     position: absolute;
     left: 50%;
@@ -97,28 +157,35 @@ body {
     background: #aaa;
     transition: all 0.3s ease;
 }
+
 .menu_title .line {
     opacity: 0;
 }
+
 .sidebar.close .line {
     opacity: 1;
 }
+
 .item {
     list-style: none;
 }
+
 .link {
     text-decoration: none;
     border-radius: 8px;
     margin-bottom: 8px;
     color: #707070;
 }
+
 .link:hover {
     color: #fff;
     background-color: #4070f4;
 }
+
 .link span {
     white-space: nowrap;
 }
+
 .link i {
     height: 50px;
     min-width: 55px;
@@ -134,12 +201,15 @@ body {
     align-items: center;
     padding-top: 15px;
     margin-top: 15px;
-    gap: 10px; 
+    gap: 10px;
     border-top: 2px solid rgba(0, 0, 0, 0.1);
 }
+
 .sidebar_profile .data_text .email {
-    font-size: 12px; /* Ubah ukuran font sesuai kebutuhan */
-    color: #707070; /* Sesuaikan warna jika perlu */
+    font-size: 12px;
+    /* Ubah ukuran font sesuai kebutuhan */
+    color: #707070;
+    /* Sesuaikan warna jika perlu */
 }
 
 
@@ -148,18 +218,83 @@ body {
     flex-direction: column;
 }
 
+/* .navbar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px 20px;
+    background-color: #fff; 
+} */
+
+/* Menambahkan style pada logo_items */
+.logo_items {
+    display: flex;
+    align-items: center;
+    /* Menjaga logo dan teks sejajar secara vertikal */
+}
+
+.logo_items .nav_image {
+    margin-right: 5px;
+    /* Memberi jarak antara logo dan nama */
+}
+
+.search_box {
+    flex-grow: 1;
+    /*Memberiruangkosongdiantaraelemenpencarian*/
+    padding: 8px;
+    margin: 0 20px;
+    /*Memberikanjarakdenganelemenlainnya*/
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info .nav_image {
+    margin-right: 10px;
+    /* Memberi jarak antara gambar dan teks */
+}
+
+.user-info .data_text {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    /* Menyusun teks username dan email secara vertikal */
+}
+
+.user-info .data_text .name {
+    font-weight: bold;
+}
+
+.user-info .data_text .email {
+    font-size: 0.9em;
+    color: #333;
+}
+
 .navbar {
+    z-index: 10;
     max-width: 100%;
     width: calc(100% - 270px);
     position: fixed;
     top: 0;
     left: 270px;
-    background: #4070f4;
-    padding: 10px 20px;
+    background: #45b5ff;
+    padding: 10px 5px;
+    /* Tambahkan padding agar lebih lebar untuk menyesuaikan dengan hamburger */
     justify-content: space-between;
-    transition: left 0.3s ease-in-out, width 0.3s ease-in-out; /* Perhalus transisi */
+    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+    align-items: center;
+    /* Menjaga semua elemen navbar sejajar secara vertikal */
 }
-.search_box {
+
+/* .search_box {
     height: 46px;
     max-width: 500px;
     width: 100%;
@@ -169,21 +304,39 @@ body {
     padding: 0 15px;
     font-size: 18px;
     color: #333;
-}
+} */
+
 .navbar img {
     height: 40px;
     width: 40px;
     margin-left: 20px;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
-  }
-  
-  .form-container {
+.card-container {
+    display: flex;
+    gap: 20px;
+    transition: margin-left 0.3s ease-in-out;
+    /* Perhalus transisi */
+    margin-top: 90px;
+    margin-left: 270px;
+}
+
+.main {
+    position: absolute;
+    width: calc(100% - 330px);
+    left: 300px;
+    min-height: 100vh;
+    font-size: 1rem;
+    margin-top: 65px;
+    /* background: var(--azure); */
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+.form-container {
     margin-left: 270px;
     padding: 40px;
     background-color: #ffffff;
@@ -191,6 +344,10 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 50px;
     transition: margin-left 0.3s ease-in-out;
+    -webkit-transition: margin-left 0.3s ease-in-out;
+    -moz-transition: margin-left 0.3s ease-in-out;
+    -ms-transition: margin-left 0.3s ease-in-out;
+    -o-transition: margin-left 0.3s ease-in-out;
 }
 
 .form-container h1 {
@@ -224,6 +381,10 @@ body {
     font-size: 14px;
     color: #333;
     transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
 }
 
 .form-group input:focus,
@@ -251,6 +412,14 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    -webkit-transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    -ms-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
 }
 
 .form-button button:hover {
@@ -273,14 +442,17 @@ body {
         left: 65%;
     }
 }
+
 @media screen and (max-width: 800px) {
     .sidebar {
         left: 0;
         z-index: 1000;
     }
+
     .sidebar.close {
         left: -100%;
     }
+
     .navbar {
         left: 0;
         max-width: 100%;
