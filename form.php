@@ -117,7 +117,7 @@ if ($result_user->num_rows > 0) {
     <nav class="navbar flex">
 
         <div class="logo_items flex">
-            <span class="nav_image"><img src="img/logo_sinapen.png" alt="logo_img" /></span>
+            <span class="nav_image"><img src="img/loga_sinapen-new.png" alt="logo_img" /></span>
             <span class="logo_name">SINAPEN</span>
         </div>
         <input type="text" name="search_box" placeholder="Search..." class="search_box" />
@@ -134,7 +134,7 @@ if ($result_user->num_rows > 0) {
 
     <!-- Main Content -->
     <div class="form-container">
-        <h1>Formulir Permohonan </h1>
+        <h1>Formulir Permohonan Surat</h1>
         <form action="proses_formulir.php" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="nik_penduduk">Nomor Induk Kependudukan (NIK):</label>

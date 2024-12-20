@@ -134,7 +134,7 @@ $result = mysqli_query($connect, $query);
     <nav class="navbar flex">
 
         <div class="logo_items flex">
-            <span class="nav_image"><img src="img/logo_sinapen.png" alt="logo_img" /></span>
+            <span class="nav_image"><img src="img/loga_sinapen-new.png" alt="logo_img" /></span>
             <span class="logo_name">SINAPEN</span>
         </div>
         <input type="text" name="search_box" placeholder="Search..." class="search_box" />
@@ -152,66 +152,68 @@ $result = mysqli_query($connect, $query);
     <!-- Main Content -->
     <div class="content">
         <div class="container">
-            <div class="table-header">
-                <h3>Daftar Permohonan Surat</h3>
-            </div>
-            <div class="table-controls">
-                <label for="entries">Show</label>
-                <select id="entries">
-                    <option value="0">0</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-                <span>Entries</span>
-                <div class="search">
-                    <label for="search">Search:</label>
-                    <input type="text" id="search" placeholder="">
+            <div class="detail-table">
+                <div class="table-header">
+                    <h3>Daftar Permohonan Surat</h3>
                 </div>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID Pengajuan</th>
-                        <th>Tipe Formulir</th>
-                        <th>Tanggal Pengajuan</th>
-                        <th>Status Pengajuan</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    // Menampilkan data pengajuan dari hasil query
-                    if (mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr>
+                <div class="table-controls">
+                    <label for="entries">Show</label>
+                    <select id="entries">
+                        <option value="0">0</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <span>Entries</span>
+                    <div class="search">
+                        <label for="search">Search:</label>
+                        <input type="text" id="search" placeholder="">
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID Pengajuan</th>
+                            <th>Tipe Formulir</th>
+                            <th>Tanggal Pengajuan</th>
+                            <th>Status Pengajuan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Menampilkan data pengajuan dari hasil query
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<tr>
                                 <td>" . $row['id_pengajuan'] . "</td>
                                 <td>" . $row['tipe_formulir'] . "</td>
                                 <td>" . date("d-m-Y", strtotime($row['tanggal_pengajuan'])) . "</td>
                                 <td>" . $row['status_pengajuan'] . "</td>
                               </tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='4'>Tidak ada pengajuan yang diproses</td></tr>";
                         }
-                    } else {
-                        echo "<tr><td colspan='4'>Tidak ada pengajuan yang diproses</td></tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
-            <div class="table-footer">
-                <button class="pagination-btn prev">
-                    <i class="fas fa-chevron-left"></i> Back
-                </button>
-                <span>Page 1 of 1 (7 items)</span>
-                <button class="pagination-btn next">
-                    Next <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
+                        ?>
+                    </tbody>
+                </table>
+                <div class="table-footer">
+                    <button class="pagination-btn prev">
+                        <i class="fas fa-chevron-left"></i> Back
+                    </button>
+                    <span>Page 1 of 1 (7 items)</span>
+                    <button class="pagination-btn next">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
 
+            </div>
         </div>
     </div>
 
     <script>
         const sidebar = document.querySelector(".sidebar");
         const hamburgerIcon = document.querySelector("#hamburger-icon");
-        const cardContainer = document.querySelector(".content");
+        const cardContainer = document.querySelector(".detail-table");
 
         const toggleSidebar = () => {
             sidebar.classList.toggle("close");

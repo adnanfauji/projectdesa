@@ -83,7 +83,7 @@ $approvedUsers = getApprovedUsers();
         <li>
           <a href="#">
             <span class="icon">
-              <span class="nav_image"><img src="img/logo_sinapen.png" alt="logo_img" /></span>
+              <span class="nav_image"><img src="img/loga_sinapen-new.png" alt="logo_img" /></span>
             </span>
             <span class="title">SINAPEN</span>
           </a>
@@ -177,7 +177,7 @@ $approvedUsers = getApprovedUsers();
       <div class="details">
         <div class="recentOrders">
           <div class="cardHeader">
-            <h2>Data Permohonan</h2>
+            <h2>Data Permohonan Surat</h2>
             <a href="#" class="btn">View All</a>
           </div>
           <table>

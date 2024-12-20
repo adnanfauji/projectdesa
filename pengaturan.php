@@ -170,7 +170,7 @@ $connect->close();
     <!-- Navbar -->
     <nav class="navbar flex">
         <div class="logo_items flex">
-            <span class="nav_image"><img src="img/logo_sinapen.png" alt="logo_img" /></span>
+            <span class="nav_image"><img src="img/loga_sinapen-new.png" alt="logo_img" /></span>
             <span class="logo_name">SINAPEN</span>
         </div>
         <input type="text" name="search_box" placeholder="Search..." class="search_box" />
@@ -254,19 +254,19 @@ $connect->close();
     <script>
         const sidebar = document.querySelector(".sidebar");
         const hamburgerIcon = document.querySelector("#hamburger-icon");
-        const cardContainer = document.querySelector(".container");
+        const cardContainer = document.querySelector(".main");
 
         const toggleSidebar = () => {
             sidebar.classList.toggle("close");
 
             if (sidebar.classList.contains("close")) {
-                cardContainer.style.marginLeft = "150px";
+                cardContainer.style.marginLeft = "75px";
                 document.querySelector('.navbar').style.width = "calc(100% - 75px)";
                 document.querySelector('.navbar').style.left = "75px";
                 hamburgerIcon.classList.remove("bx-menu");
                 hamburgerIcon.classList.add("bx-x");
             } else {
-                cardContainer.style.marginLeft = "370px";
+                cardContainer.style.marginLeft = "270px";
                 document.querySelector('.navbar').style.width = "calc(100% - 270px)";
                 document.querySelector('.navbar').style.left = "270px";
                 hamburgerIcon.classList.remove("bx-x");
@@ -274,8 +274,11 @@ $connect->close();
             }
         };
 
-        // Event listener untuk ikon hamburger
-        hamburgerIcon.addEventListener("click", toggleSidebar);
+        // Event listener for hamburger icon
+        hamburgerIcon.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+        });
+
 
         // // Event listeners for the password fields
         // const oldPasswordInput = document.getElementById("old-password");

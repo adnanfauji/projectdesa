@@ -57,12 +57,10 @@ body {
     background: #ffffff;
     padding: 15px 10px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-    transition: width 0.3s ease-in-out;
-    /* Perhalus transisi sidebar */
 }
 
 .sidebar.close {
-    width: calc(55px + 20px);
+    width: 75px;
 }
 
 .logo_items {
@@ -276,19 +274,22 @@ body {
 }
 
 .navbar {
+    display: flex;
     z-index: 10;
     max-width: 100%;
     width: calc(100% - 270px);
     position: fixed;
     top: 0;
-    left: 270px;
+    margin-left: 270px;
     background: #45b5ff;
     padding: 10px 5px;
-    /* Tambahkan padding agar lebih lebar untuk menyesuaikan dengan hamburger */
-    justify-content: space-between;
-    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
     align-items: center;
-    /* Menjaga semua elemen navbar sejajar secara vertikal */
+}
+
+.sidebar.close~.navbar,
+.sidebar.close~.container {
+    width: calc(100% - 75px);
+    margin-left: 75px;
 }
 
 /* .search_box {
@@ -318,15 +319,12 @@ body {
 
 /* Main Content Styling */
 .container {
-    max-width: 70%;
-    margin-top: 60px;
-    margin-left: 370px;
+    position: relative;
+    width: calc(100% - 270px);
+    margin-left: 270px;
     background-color: #ffffff;
-    padding: 30px;
-    /* Increase padding for better spacing */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: margin-left 0.3s ease-in-out;
 }
 
 h2 {

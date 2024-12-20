@@ -347,6 +347,7 @@ body {
 
 .container {
     position: relative;
+    /* max-width: 100%; */
     width: calc(100% - 270px);
     margin-left: 270px;
     padding: 20px;
