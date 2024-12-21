@@ -23,36 +23,16 @@ if (isset($_POST['id_pengajuan']) && isset($_POST['action'])) {
     if ($result) {
       // Tampilkan SweetAlert untuk pengajuan yang disetujui
       echo "
-      <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-            <script>
-              Swal.fire({
-                  icon: 'success',
-                  title: 'Pengajuan disetujui!',
-                  text: 'Pengajuan berhasil disetujui.',
-                  confirmButtonText: 'OK'
-              }).then((result) => {
-                  if (result.isConfirmed) {
-                      window.location.href = 'admin_dashboard.php'; // Redirect ke halaman dashboard admin
-                      exit();
-                      }
-              });
+      <script>
+                alert('Pengajuan berhasil disetujui.');
+                window.location.href = 'admin_dashboard.php'; // Redirect ke halaman dashboard admin
             </script>";
     } else {
       // Tampilkan SweetAlert jika gagal
       echo "
-      <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-            <script>
-              Swal.fire({
-                  icon: 'error',
-                  title: 'Terjadi kesalahan!',
-                  text: 'Gagal menyetujui pengajuan.',
-                  confirmButtonText: 'OK'
-              }).then((result) => {
-                  if (result.isConfirmed) {
-                      window.location.href = 'admin_dashboard.php';
-                      exit();
-                      }
-              });
+        <script>
+                alert('Gagal menyetujui pengajuan.');
+                window.location.href = 'admin_dashboard.php'; // Redirect ke halaman dashboard admin
             </script>";
     }
   }
@@ -64,36 +44,17 @@ if (isset($_POST['id_pengajuan']) && isset($_POST['action'])) {
     if ($result) {
       // Tampilkan SweetAlert untuk pengajuan yang ditolak
       echo "
-        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-            <script>
-              Swal.fire({
-                  icon: 'success',
-                  title: 'Pengajuan ditolak!',
-                  text: 'Pengajuan berhasil ditolak.',
-                  confirmButtonText: 'OK'
-              }).then((result) => {
-                  if (result.isConfirmed) {
-                      window.location.href = 'admin_dashboard.php'; // Redirect ke halaman dashboard admin
-                      exit();
-                      }
-              });
+       <script>
+                alert('Pengajuan berhasil ditolak.');
+                window.location.href = 'admin_dashboard.php'; // Redirect ke halaman dashboard admin
             </script>";
     } else {
       // Tampilkan SweetAlert jika gagal
       echo "
-       <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-            <script>
-              Swal.fire({
-                  icon: 'error',
-                  title: 'Terjadi kesalahan!',
-                  text: 'Gagal menolak pengajuan.',
-                  confirmButtonText: 'OK'
-              }).then((result) => {
-                  if (result.isConfirmed) {
-                      window.location.href = 'admin_dashboard.php';
-                      exit();
-                      }
-              });
+      
+           <script>
+                alert('Gagal menolak pengajuan.');
+                window.location.href = 'admin_dashboard.php'; // Redirect ke halaman dashboard admin
             </script>";
     }
   }
